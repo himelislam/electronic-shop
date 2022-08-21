@@ -1,0 +1,82 @@
+.title {
+    margin-bottom: 5vh
+}
+
+.card4 {
+    margin: auto;
+    width: 100%;
+    box-shadow: 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border-radius: 1rem;
+    border: transparent;
+    margin-bottom: 50px;
+    margin-top: 50px;
+}
+
+@media(max-width:767px) {
+    .card4 {
+        margin: 3vh auto
+    }
+}
+
+.cart4 {
+    background-color: #fff;
+    padding: 4vh 5vh;
+    border-bottom-left-radius: 1rem;
+    border-top-left-radius: 1rem
+}
+
+@media(max-width:767px) {
+    .cart4 {
+        padding: 4vh;
+        border-bottom-left-radius: unset;
+        border-top-right-radius: 1rem
+    }
+}
+
+.summary {
+    background-color: #ddd;
+    border-top-right-radius: 1rem;
+    border-bottom-right-radius: 1rem;
+    padding: 4vh;
+    color: rgb(65, 65, 65)
+}
+
+@media(max-width:767px) {
+    .summary {
+        border-top-right-radius: unset;
+        border-bottom-left-radius: 1rem
+    }
+}
+
+.summary .col-2 {
+    padding: 0
+}
+
+.summary .col-10 {
+    padding: 0
+}
+
+.cartrow {
+    margin: 0
+}
+
+.title b {
+    font-size: 1.5rem
+}
+
+.main {
+    margin: 0;
+    padding: 2vh 0;
+    width: 100%
+}
+
+
+.cartimg {
+    width: 50px;
+}
+
+@media only screen and (max-width: 600px) {
+    .cartimg {
+        width: 30px;
+    }
+}
