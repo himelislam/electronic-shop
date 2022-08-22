@@ -62,7 +62,7 @@ export default function ProductEditScreen() {
   const [countInStock, setCountInStock] = useState('');
   const [brand, setBrand] = useState('');
   const [description, setDescription] = useState('');
-  const [auction, setAuction] = useState('');
+
 
 
   useEffect(() => {
@@ -80,7 +80,6 @@ export default function ProductEditScreen() {
         setCountInStock(data.countInStock);
         setBrand(data.brand);
         setDescription(data.description);
-        setAuction(data.auction);
         dispatch({ type: 'FETCH_SUCCESS' });
       } catch (err) {
         dispatch({
@@ -112,7 +111,6 @@ export default function ProductEditScreen() {
           brand,
           countInStock,
           description,
-          auction,
         },
         {
           headers: { Authorization: `Bearer ${userInfo.token}` },
@@ -154,6 +152,8 @@ export default function ProductEditScreen() {
       dispatch({ type: 'UPLOAD_FAIL', payload: getError(err) });
     }
   };
+
+
  
 
 
@@ -165,11 +165,11 @@ export default function ProductEditScreen() {
           <hr style={{ backgroundColor: '#52017d', height: '3px' }} />
           <Link to="/admin/products" className=" nav-link text-danger">Manage Products</Link>
           <hr style={{ backgroundColor: '#52017d', height: '3px' }} />
+          <Link to="/admin/manageAuction" className=" nav-link ">Manage Auctions</Link>
+          <hr style={{ backgroundColor: '#52017d', height: '3px' }} />
           <Link to="/admin/orders" className="  nav-link">Manage Orders</Link>
           <hr style={{ backgroundColor: '#52017d', height: '3px' }} />
           <Link to="/admin/users" className=" nav-link">Manage Users</Link>
-          <hr style={{ backgroundColor: '#52017d', height: '3px' }} />
-          <Link to="/admin/auction" className=" nav-link">Auction</Link>
           <hr style={{ backgroundColor: '#52017d', height: '3px' }} />
         </div>
 
@@ -211,16 +211,7 @@ export default function ProductEditScreen() {
                   />
                 </Form.Group>
 
-                <Form.Group className="mb-3" controlId="name">
-                  <Form.Label>Auction</Form.Label>
-
-                  <Form.Select onChange={(e) => setAuction(e.target.value)} value={auction} controlId="name">
-
-                    <option>Not Auction</option>
-                    <option value="auction">Auction</option>
-
-                  </Form.Select>
-                </Form.Group>
+                
                 <Form.Group className="mb-3" controlId="image">
                   <Form.Label>Image File</Form.Label>
                   <Form.Control
