@@ -39,7 +39,7 @@ const Auction = () => {
         fetchData();
     }, []);
 
-
+    console.log(products ,'Hinelllll');
     return (
         <div className='container mt-5'>
             <h1 className='text-center'><span>AUCTION</span> <span className='text-danger'>PRODUCTS</span></h1>

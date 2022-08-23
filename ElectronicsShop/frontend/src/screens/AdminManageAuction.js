@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useReducer } from 'react';
+import React, { useContext, useEffect, useReducer, useState } from 'react';
 import axios from 'axios';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import Row from 'react-bootstrap/Row';
@@ -77,10 +77,43 @@ export default function AdminManageAuction() {
   const { state } = useContext(Store);
   const { userInfo } = state;
 
+  // `/api/manageAuction/admin?page=${page} `
+
+  // console.log(data)
+  // const [da]
+
+  // const [products1, setProducts1] = useState([]); 
+  
+  // useEffect(() => { 
+  //   const url = '/allauction' 
+  //   fetch(url) 
+  //   .then(res => res.json()) 
+  //   .then(data => setProducts1(data)) 
+  // }, [])
+
+
+
+  const [reviews, setReviews] = useState([]);
+
+    useEffect(() => {
+        // axios.get('http://localhost:5000/allauction').then((response) => {
+        //     setReviews(response.data);
+        // });
+
+        axios
+  .get("http://localhost:5000/allauction")
+  .then(function (response) {
+    console.log(response.data, 'data found');
+    setReviews(response.data)
+  });
+    }, []);
+
+    
+console.log(reviews, 'hellald asda asd')
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const { data } = await axios.get(`/api/manageAuction/admin?page=${page} `, {
+        const { data } = await axios.get(`/allauction`, {
           headers: { Authorization: `Bearer ${userInfo.token}` },
         });
 
@@ -88,12 +121,20 @@ export default function AdminManageAuction() {
       } catch (err) { }
     };
 
+
+    
+
     if (successDelete) {
       dispatch({ type: 'DELETE_RESET' });
     } else {
       fetchData();
     }
   }, [page, userInfo, successDelete]);
+
+  useEffect(()=>{
+    const {data} = axios.get('/allauction')
+    console.log(data, 'axioessss');
+  },[])
 
   const createHandler = async () => {
     if (window.confirm('Are you sure to create?')) {

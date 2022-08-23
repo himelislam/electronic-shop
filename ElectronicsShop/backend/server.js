@@ -33,6 +33,11 @@ async function run() {
     const reviewCollection = database.collection('review');
     const auctionCollection = database.collection('auction');
 
+    // app.get('/manageAuction', async(req, res) => {
+    //   const auctionProducts = await auctionCollection.find();
+    //   res.send(auctionProducts);
+    // })
+    
     app.post('/review', async (req, res) => {
       const review = req.body;
       const result = await reviewCollection.insertOne(review);
@@ -59,12 +64,26 @@ async function run() {
       res.json(result);
 
     });
-    app.post('/all/auction', async (req, res) => {
+    // app.post('/all/auction', async (req, res) => {
+    //   const cursor = auctionCollection.find({});
+    //   const result = await cursor.toArray();
+    //   res.send(result);
+
+    // });
+
+    // app.get('/allauction', async(req, res) => {
+    //   const auctions = await auctionCollection.find({}).toArray();
+    //   console.log(auctions)
+    //   res.send(auctions);
+    // })
+
+    app.get('/allauction', async (req, res) => {
       const cursor = auctionCollection.find({});
       const result = await cursor.toArray();
+      console.log('Hello')
       res.send(result);
-
     });
+    
     app.delete('/auction/:id', async (req, res) => {
       const id = req.params.id;
       const query = { _id: ObjectId(id) };

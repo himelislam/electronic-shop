@@ -92,7 +92,7 @@ export default function ProductEditScreen() {
 
   }, [productId]);
 
-  console.log(auction);
+  // console.log(auction);  
 
   const submitHandler = async (e) => {
     e.preventDefault();
