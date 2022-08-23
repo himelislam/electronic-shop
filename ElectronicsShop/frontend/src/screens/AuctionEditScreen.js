@@ -61,7 +61,7 @@ export default function AuctionEditScreen() {
   const [category, setCategory] = useState('');
   const [brand, setBrand] = useState('');
   const [description, setDescription] = useState('');
-  const [countdown, setCountdown] = useState('');
+  const [time, setTime] = useState('');
 
 
   useEffect(() => {
@@ -78,7 +78,7 @@ export default function AuctionEditScreen() {
         setCategory(data.category);
         setBrand(data.brand);
         setDescription(data.description);
-        setCountdown(data.auction);
+        setTime(data.time);
         dispatch({ type: 'FETCH_SUCCESS' });
       } catch (err) {
         dispatch({
@@ -107,7 +107,7 @@ export default function AuctionEditScreen() {
           category,
           brand,
           description,
-          countdown,
+          time
         },
         {
           headers: { Authorization: `Bearer ${userInfo.token}` },
@@ -246,12 +246,12 @@ export default function AuctionEditScreen() {
                   />
                 </Form.Group>
                 {/* countdown add */}
-                <Form.Group className="mb-3" controlId="countdown">
-                  <Form.Label>Date and Time</Form.Label>
+                <Form.Group className="mb-3" controlId="time">
+                  <Form.Label>Time</Form.Label>
                   <Form.Control
-                    type='datetime-local'
-                    value={countdown}
-                    onChange={(e) => setDescription(e.target.value)}
+                  type='datetime-local'
+                    value={time}
+                    onChange={(e) => setTime(e.target.value)}
                     required
                   />
                 </Form.Group>
