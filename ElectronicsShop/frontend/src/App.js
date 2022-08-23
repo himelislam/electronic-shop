@@ -53,13 +53,15 @@ function App() {
   const { fullBox, cart, userInfo } = state;
   const [user] = useAuthState(auth)
 
-  const signoutHandler = () => {
-    signOut(auth)
+  const signoutHandler = (e) => {
     ctxDispatch({ type: 'USER_SIGNOUT' });
     localStorage.removeItem('userInfo');
     localStorage.removeItem('shippingAddress');
     localStorage.removeItem('paymentMethod');
     window.location.href = '/signin';
+    signOut(auth);
+    console.log('clickeeddd');
+    e.preventDefault();
   };
   const [sidebarIsOpen, setSidebarIsOpen] = useState(false);
   const [categories, setCategories] = useState([]);
@@ -104,7 +106,12 @@ function App() {
               <Navbar.Collapse id="basic-navbar-nav">
 
                 <Nav className="me-auto  w-100  justify-content-end">
-                  <Link to="/cart" className="nav-link text-light">
+                  {
+                    !userInfo?.isAdmin && (
+                      <>
+                  {
+                    userInfo || user ? 
+                    <Link to="/cart" className="nav-link text-light">
                     Cart
                     {cart.cartItems.length > 0 && (
                       <Badge pill bg="danger">
@@ -112,6 +119,9 @@ function App() {
                       </Badge>
                     )}
                   </Link>
+                  :
+                  <></>
+                  }
                   <Link to="/search" className="nav-link text-light">
                     Products
                   </Link>
@@ -146,11 +156,20 @@ function App() {
                     <Link className="nav-link" to="/signin">
                       Sign In
                     </Link>
-                  )}
+                  )}</>
+                    )
+                  }
                   {userInfo && userInfo.isAdmin && (
+                    <>
                     <Link to="/admin/admindashboard" className="nav-link text-light">
-                      Admin
+                      Dashboard
                     </Link>
+                    <Link 
+                        to="#signout"
+                        onClick={signoutHandler} 
+                        className="nav-link text-light">
+                        Sign Out
+                    </Link></>
                     // <NavDropdown title="Admin" id="admin-nav-dropdown" class="text-light">
                     //   <LinkContainer to="/admin/dashboard">
                     //     <NavDropdown.Item>Dashboard</NavDropdown.Item>

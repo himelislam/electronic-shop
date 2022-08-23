@@ -170,7 +170,26 @@ export default function PlaceOrderScreen() {
                       onClick={placeOrderHandler}
                       disabled={cart.cartItems.length === 0}
                     >
-                      Place Order
+                      Cash On Delivery
+                    </Button>
+                  </div>
+                  {loading && <LoadingBox></LoadingBox>}
+                </ListGroup.Item>
+                <ListGroup.Item>
+                <div className='d-grid'>
+                  <p className='text-center text-bold'>Pay Via Bkash</p>
+                  <input className='mb-2 border p-2' type='number' placeholder='Your Bkash Number'/>
+                  <input className='border p-2' type='password' placeholder='Your Bkash Pin'/>
+                </div>
+                </ListGroup.Item>
+                <ListGroup.Item>
+                  <div className="d-grid">
+                    <Button
+                      type="button"
+                      onClick={placeOrderHandler}
+                      disabled={cart.cartItems.length === 0}
+                    >
+                      Pay
                     </Button>
                   </div>
                   {loading && <LoadingBox></LoadingBox>}
