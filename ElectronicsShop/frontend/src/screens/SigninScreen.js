@@ -66,7 +66,7 @@ const togglePasswordVisiblity = () => {
 
   const resetPassword = () => {
     sendPasswordResetEmail(email);
-    toast.success('Password reset mail sent')
+    // toast.success('Password reset mail sent')
     console.log('clicked to reset')
   }
 
@@ -124,7 +124,7 @@ const togglePasswordVisiblity = () => {
                                 <span className="label-text">Email</span>
                             </label> */}
                             <input
-                                type="email"
+                                type="text"
                                 placeholder="Your Email"
                                 className="input input-bordered w-full max-w-xs form-control"
                                 {...register("email", {
@@ -139,8 +139,8 @@ const togglePasswordVisiblity = () => {
                                 })}
                             />
                             <label className="label">
-                                {errors.email?.type === 'required' && <span className="label-text-alt text-red-600">{errors.email.message}</span>}
-                                {errors.email?.type === 'pattern' && <span className="label-text-alt text-red-600">{errors.email.message}</span>}
+                                {errors.email?.type === 'required' && <span className="label-text-alt text-red-600 text-danger">{errors.email.message}</span>}
+                                {errors.email?.type === 'pattern' && <span className="label-text-alt text-red-600 text-danger">{errors.email.message}</span>}
 
                             </label>
                         </div>
@@ -158,25 +158,25 @@ const togglePasswordVisiblity = () => {
                                         message: 'Password is Required'
                                     },
                                     minLength: {
-                                        value: 6,
-                                        message: 'Must be 6 characters or longer'
+                                        value: 8,
+                                        message: 'Must be 8 characters or longer'
                                     }
                                 })}
                             />
-                            <i onClick={togglePasswordVisiblity}>{eye}</i>
+                            <i onClick={togglePasswordVisiblity}>{eye}</i><br />
                             <label className="label">
-                                {errors.password?.type === 'required' && <span className="label-text-alt text-red-600">{errors.password.message}</span>}
-                                {errors.password?.type === 'minLength' && <span className="label-text-alt text-red-600">{errors.password.message}</span>}
+                                {errors.password?.type === 'required' && <span className="label-text-alt text-red-600 text-danger">{errors.password.message}</span>}
+                                {errors.password?.type === 'minLength' && <span className="label-text-alt text-red-600 text-danger">{errors.password.message}</span>}
 
                             </label>
                         </div>
-                                {signInError}
+                                {/* {signInError} */}
                         <div className='text-center'>
                         <input className='btn btn-primary' type="submit" value='Login' />
                         </div>
                     </form>
                     <div id="emailHelp" class="form-text mb-4 text-dark">
-                <p className='text-primary pe-auto' onClick={resetPassword} >Forget Password?</p>
+                <a className='text-primary pe-auto' onClick={resetPassword} >Forget Password?</a>
               </div>
                     <p><small>New to Electronic Shop? <Link to={`/signup?redirect=${redirect}`} className='text-success'>Create New Account</Link></small></p>
                     <div className="text-center">OR</div>

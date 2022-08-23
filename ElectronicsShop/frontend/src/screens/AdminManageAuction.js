@@ -52,7 +52,7 @@ const reducer = (state, action) => {
   }
 };
 
-export default function ProductListScreen() {
+export default function AdminManageAuction() {
   const [
     {
       loading,
@@ -80,7 +80,7 @@ export default function ProductListScreen() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const { data } = await axios.get(`/api/products/admin?page=${page} `, {
+        const { data } = await axios.get(`/api/manageAuction/admin?page=${page} `, {
           headers: { Authorization: `Bearer ${userInfo.token}` },
         });
 
@@ -100,15 +100,15 @@ export default function ProductListScreen() {
       try {
         dispatch({ type: 'CREATE_REQUEST' });
         const { data } = await axios.post(
-          '/api/products',
+          '/api/manageAuction',
           {},
           {
             headers: { Authorization: `Bearer ${userInfo.token}` },
           }
         );
-        toast.success('product created successfully');
+        toast.success('Auction created successfully');
         dispatch({ type: 'CREATE_SUCCESS' });
-        navigate(`/admin/product/${data.product._id}`);
+        navigate(`/admin/manageAuction/${data.product._id}`);
       } catch (err) {
         toast.error(getError(error));
         dispatch({
@@ -121,7 +121,7 @@ export default function ProductListScreen() {
   const deleteHandler = async (product) => {
     if (window.confirm('Are you sure to delete?')) {
       try {
-        await axios.delete(`/api/products/${product._id}`, {
+        await axios.delete(`/api/manageAuction/${product._id}`, {
           headers: { Authorization: `Bearer ${userInfo.token}` },
         });
         toast.success('product deleted successfully');
@@ -143,9 +143,9 @@ export default function ProductListScreen() {
         <div className="col-md-2 col-4 text-center " style={{ borderRightStyle: 'solid' }}>
           <Link to="/admin/admindashboard" className=" nav-link ">Dashboard</Link>
           <hr style={{ backgroundColor: '#52017d', height: '3px' }} />
-          <Link to="/admin/products" className=" nav-link text-danger">Manage Products</Link>
+          <Link to="/admin/products" className=" nav-link ">Manage Products</Link>
           <hr style={{ backgroundColor: '#52017d', height: '3px' }} />
-          <Link to="/admin/manageAuction" className=" nav-link ">Manage Auctions</Link>
+          <Link to="/admin/manageAuction" className=" nav-link text-danger">Manage Auctions</Link>
             <hr style={{ backgroundColor: '#52017d', height: '3px' }} />
           <Link to="/admin/orders" className="  nav-link">Manage Orders</Link>
           <hr style={{ backgroundColor: '#52017d', height: '3px' }} />
@@ -164,7 +164,7 @@ export default function ProductListScreen() {
               <Col className="col text-end">
                 <div>
                   <Button type="button" onClick={createHandler}>
-                    Create Product
+                    Create Auction
                   </Button>
                 </div>
               </Col>
@@ -201,7 +201,7 @@ export default function ProductListScreen() {
                           <Button
                             type="button"
                             variant="light"
-                            onClick={() => navigate(`/admin/product/${product._id}`)}
+                            onClick={() => navigate(`/admin/manageAuction/${product._id}`)}
                           >
                             Edit
                           </Button>
@@ -223,13 +223,13 @@ export default function ProductListScreen() {
                     <Link
                       className={x + 1 === Number(page) ? 'btn text-bold' : 'btn'}
                       key={x + 1}
-                      to={`/admin/products?page=${x + 1}`}
+                      to={`/admin/manageAuction?page=${x + 1}`}
                     >
                       {x + 1}
                     </Link>
                   ))}
                 </div>
-              </div >
+              </div > 
 
             )
             }

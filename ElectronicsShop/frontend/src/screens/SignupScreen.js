@@ -128,12 +128,16 @@ console.log(error3)
                                     required: {
                                         value: true,
                                         message: 'Name is Required'
-                                    }
+                                    },
+                                    pattern: {
+                                      value: /^([^0-9]*)$/,
+                                      message: 'Provide a valid Name'
+                                  }
                                 })}
                             />
                             <label className="label">
                                 {errors.name?.type === 'required' && <span className="label-text-alt text-danger">{errors.name.message}</span>}
-
+                                {errors.name?.type === 'pattern' && <span className="label-text-alt text-danger">{errors.name.message}</span>}
                             </label>
                         </div>
                         <div className="">
@@ -141,7 +145,7 @@ console.log(error3)
                                 <span className="label-text">Email</span>
                             </label> */}
                             <input
-                                type="email"
+                                type="text"
                                 placeholder="Your Email"
                                 className="form-control input input-bordered w-full max-w-xs"
                                 {...register("email", {
@@ -175,21 +179,22 @@ console.log(error3)
                                         message: 'Password is Required'
                                     },
                                     minLength: {
-                                        value: 6,
-                                        message: 'Must be 6 characters or longer'
+                                        value: 8,
+                                        message: 'Must be 8 characters or longer'
                                     },
                                     pattern: {
-                                      value: /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/,
-                                      message: 'Provide a strong password'
+                                      // value: /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/,
+                                      value: /(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}/,
+                                      message: 'Provide 8 characters, at least 1 letter, 1 number and 1 special character!'
                                   }
                                 })}
                             />
                             <i onClick={togglePasswordVisiblity1}>{eye1}</i>
-                            <label className="label">
+                            {/* <label className="label">
                                 {errors.password?.type === 'required' && <span className="label-text-alt text-danger">{errors.password.message}</span>}
                                 {errors.password?.type === 'minLength' && <span className="label-text-alt text-danger">{errors.password.message}</span>}
                                 {errors.password?.type === 'pattern' && <span className="label-text-alt text-danger">{errors.password.message}</span>}
-                            </label>
+                            </label> */}
                         </div>
                         <div className="">
                             {/* <label className="label">
@@ -205,15 +210,15 @@ console.log(error3)
                                         message: 'Password is Required'
                                     },
                                     minLength: {
-                                        value: 6,
-                                        message: 'Must be 6 characters or longer'
+                                        value: 8,
+                                        message: 'Must be 8 characters or longer'
                                     },
                                     pattern: {
-                                      value: /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/,
-                                      message: 'Provide a strong password'
+                                      value: /(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}/,
+                                      message: 'Provide 8 characters, at least 1 letter, 1 number and 1 special character!'
                                   }
                                 })}
-                            /><i onClick={togglePasswordVisiblity2}>{eye2}</i>
+                            /><i className='eyePlace' onClick={togglePasswordVisiblity2}>{eye2}</i>
                             <label className="label">
                                 {errors.password?.type === 'required' && <span className="label-text-alt text-danger">{errors.password.message}</span>}
                                 {errors.password?.type === 'minLength' && <span className="label-text-alt text-danger">{errors.password.message}</span>}

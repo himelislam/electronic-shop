@@ -40,7 +40,7 @@ const reducer = (state, action) => {
       return state;
   }
 };
-export default function ProductEditScreen() {
+export default function AuctionEditScreen() {
   const navigate = useNavigate();
   const params = useParams();
   const { id: productId } = params;
@@ -59,17 +59,16 @@ export default function ProductEditScreen() {
   const [image, setImage] = useState('');
   const [images, setImages] = useState([]);
   const [category, setCategory] = useState('');
-  const [countInStock, setCountInStock] = useState('');
   const [brand, setBrand] = useState('');
   const [description, setDescription] = useState('');
-
+  const [time, setTime] = useState('');
 
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         dispatch({ type: 'FETCH_REQUEST' });
-        const { data } = await axios.get(`/api/products/${productId}`);
+        const { data } = await axios.get(`/api/manageAuction/${productId}`);
 
         setName(data.name);
         setSlug(data.slug);
@@ -77,9 +76,9 @@ export default function ProductEditScreen() {
         setImage(data.image);
         setImages(data.images);
         setCategory(data.category);
-        setCountInStock(data.countInStock);
         setBrand(data.brand);
         setDescription(data.description);
+        setTime(data.time);
         dispatch({ type: 'FETCH_SUCCESS' });
       } catch (err) {
         dispatch({
@@ -92,14 +91,12 @@ export default function ProductEditScreen() {
 
   }, [productId]);
 
-  console.log(auction);
-
   const submitHandler = async (e) => {
     e.preventDefault();
     try {
       dispatch({ type: 'UPDATE_REQUEST' });
       await axios.put(
-        `/api/products/${productId}`,
+        `/api/manageAuction/${productId}`,
         {
           _id: productId,
           name,
@@ -109,8 +106,8 @@ export default function ProductEditScreen() {
           images,
           category,
           brand,
-          countInStock,
           description,
+          time
         },
         {
           headers: { Authorization: `Bearer ${userInfo.token}` },
@@ -120,7 +117,7 @@ export default function ProductEditScreen() {
         type: 'UPDATE_SUCCESS',
       });
       toast.success('Product updated successfully');
-      navigate('/admin/products');
+      navigate('/admin/manageAuction');
     } catch (err) {
       toast.error(getError(err));
       dispatch({ type: 'UPDATE_FAIL' });
@@ -152,8 +149,6 @@ export default function ProductEditScreen() {
       dispatch({ type: 'UPLOAD_FAIL', payload: getError(err) });
     }
   };
-
-
  
 
 
@@ -163,14 +158,16 @@ export default function ProductEditScreen() {
         <div className="col-md-2 col-4 text-center " style={{ borderRightStyle: 'solid' }}>
           <Link to="/admin/admindashboard" className=" nav-link ">Dashboard</Link>
           <hr style={{ backgroundColor: '#52017d', height: '3px' }} />
-          <Link to="/admin/products" className=" nav-link text-danger">Manage Products</Link>
+          <Link to="/admin/products" className=" nav-link ">Manage Products</Link>
           <hr style={{ backgroundColor: '#52017d', height: '3px' }} />
-          <Link to="/admin/manageAuction" className=" nav-link ">Manage Auctions</Link>
+          <Link to="/admin/manageAuction" className=" nav-link text-danger">Manage Auctions</Link>
           <hr style={{ backgroundColor: '#52017d', height: '3px' }} />
           <Link to="/admin/orders" className="  nav-link">Manage Orders</Link>
           <hr style={{ backgroundColor: '#52017d', height: '3px' }} />
           <Link to="/admin/users" className=" nav-link">Manage Users</Link>
           <hr style={{ backgroundColor: '#52017d', height: '3px' }} />
+          {/* <Link to="/admin/auction" className=" nav-link">Auction</Link>
+          <hr style={{ backgroundColor: '#52017d', height: '3px' }} /> */}
         </div>
 
         <div className="col-md-10 col-8">
@@ -202,7 +199,7 @@ export default function ProductEditScreen() {
                     required
                   />
                 </Form.Group>
-                <Form.Group className="mb-3" controlId="name">
+                <Form.Group className="mb-3" controlId="Price">
                   <Form.Label>Price</Form.Label>
                   <Form.Control
                     value={price}
@@ -210,8 +207,6 @@ export default function ProductEditScreen() {
                     required
                   />
                 </Form.Group>
-
-                
                 <Form.Group className="mb-3" controlId="image">
                   <Form.Label>Image File</Form.Label>
                   <Form.Control
@@ -242,19 +237,21 @@ export default function ProductEditScreen() {
                     required
                   />
                 </Form.Group>
-                <Form.Group className="mb-3" controlId="countInStock">
-                  <Form.Label>Count In Stock</Form.Label>
-                  <Form.Control
-                    value={countInStock}
-                    onChange={(e) => setCountInStock(e.target.value)}
-                    required
-                  />
-                </Form.Group>
                 <Form.Group className="mb-3" controlId="description">
                   <Form.Label>Description</Form.Label>
                   <Form.Control
                     value={description}
                     onChange={(e) => setDescription(e.target.value)}
+                    required
+                  />
+                </Form.Group>
+                {/* countdown add */}
+                <Form.Group className="mb-3" controlId="time">
+                  <Form.Label>Time</Form.Label>
+                  <Form.Control
+                  type='datetime-local'
+                    value={time}
+                    onChange={(e) => setTime(e.target.value)}
                     required
                   />
                 </Form.Group>
