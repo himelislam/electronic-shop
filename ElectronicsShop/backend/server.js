@@ -33,6 +33,24 @@ async function run() {
     const database = client.db('Ecommerce');
     const reviewCollection = database.collection('review');
     // const auctionCollection = database.collection('auction');
+    const auction = database.collection('auctionProduct');
+
+
+    // get 
+    app.post('/auctionproduct', async (req, res) => {
+      const auctionProduct = req.body;
+      const result = await auction.insertOne(auctionProduct);
+      res.json(result);
+    });
+
+    // post
+    app.post('/all/auctionproduct', async (req, res) => {
+      const auctionProduct = auction.find({});
+      const result = await auctionProduct.toArray();
+      res.send(result);
+    });
+
+
 
     app.get('/manageAuction', async(req, res) => {
       const auctionProducts = await auctionCollection.find();

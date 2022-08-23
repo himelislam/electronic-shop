@@ -93,48 +93,48 @@ export default function AdminManageAuction() {
 
 
 
-  const [reviews, setReviews] = useState([]);
+  // const [reviews, setReviews] = useState([]);
 
-    useEffect(() => {
-        // axios.get('http://localhost:5000/allauction').then((response) => {
-        //     setReviews(response.data);
-        // });
+  //   useEffect(() => {
+  //       // axios.get('http://localhost:5000/allauction').then((response) => {
+  //       //     setReviews(response.data);
+  //       // });
 
-        axios
-  .get("http://localhost:5000/allauction")
-  .then(function (response) {
-    console.log(response.data, 'data found');
-    setReviews(response.data)
-  });
-    }, []);
-
-    
-console.log(reviews, 'hellald asda asd')
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const { data } = await axios.get(`/allauction`, {
-          headers: { Authorization: `Bearer ${userInfo.token}` },
-        });
-
-        dispatch({ type: 'FETCH_SUCCESS', payload: data });
-      } catch (err) { }
-    };
-
+  //       axios
+  // .get("http://localhost:5000/allauction")
+  // .then(function (response) {
+  //   console.log(response.data, 'data found');
+  //   setReviews(response.data)
+  // });
+  //   }, []);
 
     
+// console.log(reviews, 'hellald asda asd');
 
-    if (successDelete) {
-      dispatch({ type: 'DELETE_RESET' });
-    } else {
-      fetchData();
-    }
-  }, [page, userInfo, successDelete]);
+useEffect(() => {
+  const fetchData = async () => {
+    try {
+      const { data } = await axios.get(`/api/manageAuction/admin?page=${page} `, {
+        headers: { Authorization: `Bearer ${userInfo.token}` },
+      });
 
-  useEffect(()=>{
-    const {data} = axios.get('/allauction')
-    console.log(data, 'axioessss');
-  },[])
+      dispatch({ type: 'FETCH_SUCCESS', payload: data });
+    } catch (err) { }
+  };
+
+  if (successDelete) {
+    dispatch({ type: 'DELETE_RESET' });
+  } else {
+    fetchData();
+  }
+}, [page, userInfo, successDelete]);
+
+  console.log(products, 'from admin manage auction')
+
+  // useEffect(()=>{
+  //   const {data} = axios.get('/allauction')
+  //   console.log(data, 'axioessss');
+  // },[])
 
   const createHandler = async () => {
     if (window.confirm('Are you sure to create?')) {
@@ -232,7 +232,7 @@ console.log(reviews, 'hellald asda asd')
                     </tr>
                   </thead>
                   <tbody>
-                    {products.map((product) => (
+                    {products?.map((product) => (
                       <tr key={product._id}>
                         <td> <img style={{ width: '40px', height: '40px' }} src={product.image} alt="" /> </td>
                         <td>{product.name}</td>

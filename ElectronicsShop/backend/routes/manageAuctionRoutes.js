@@ -1,6 +1,5 @@
 import express from 'express';
 import expressAsyncHandler from 'express-async-handler';
-// import Product from '../models/productModel.js';
 import ManageAuction from '../models/manageAuctionModel.js';
 import { isAuth, isAdmin } from '../utils.js';
 
@@ -108,29 +107,29 @@ manageAuctionRouter.put(
 //   })
 // );
 
-// const PAGE_SIZE = 8;
+const PAGE_SIZE = 8;
 
-// manageAuctionRouter.get(
-//   '/admin',
-//   isAuth,
-//   isAdmin,
-//   expressAsyncHandler(async (req, res) => {
-//     const { query } = req;
-//     const page = query.page || 1;
-//     const pageSize = query.pageSize || PAGE_SIZE;
+manageAuctionRouter.get(
+  '/admin',
+  isAuth,
+  isAdmin,
+  expressAsyncHandler(async (req, res) => {
+    const { query } = req;
+    const page = query.page || 1;
+    const pageSize = query.pageSize || PAGE_SIZE;
 
-//     const manageAuctions = await ManageAuction.find()
-//       .skip(pageSize * (page - 1))
-//       .limit(pageSize);
-//     const countProducts = await ManageAuction.countDocuments();
-//     res.send({
-//         manageAuctions,
-//       countProducts,
-//       page,
-//       pages: Math.ceil(countProducts / pageSize),
-//     });
-//   })
-// );
+    const manageAuctions = await ManageAuction.find()
+      .skip(pageSize * (page - 1))
+      .limit(pageSize);
+    const countProducts = await ManageAuction.countDocuments();
+    res.send({
+        manageAuctions,
+      countProducts,
+      page,
+      pages: Math.ceil(countProducts / pageSize),
+    });
+  })
+);
 
 // manageAuctionRouter.get(
 //   '/search',
