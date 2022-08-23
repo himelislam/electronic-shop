@@ -47,6 +47,8 @@ import AdminAuction from './screens/AdminAuction';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import auth from './firebase.init';
 import { signOut } from 'firebase/auth';
+import AdminManageAuction from './screens/AdminManageAuction';
+import AuctionEditScreen from './screens/AuctionEditScreen';
 
 function App() {
   const { state, dispatch: ctxDispatch } = useContext(Store);
@@ -231,6 +233,8 @@ function App() {
                 element={<ShippingAddressScreen />}
               ></Route>
               <Route path="/payment" element={<PaymentMethodScreen />}></Route>
+              
+              
               {/* Admin Routes */}
               <Route
                 path="/admin/dashboard"
@@ -284,8 +288,24 @@ function App() {
                 }
               ></Route>
 
+             {/* Admin Manage Auction */}
+             <Route
+                path="/admin/manageAuction"
+                element={
+                  <AdminRoute>
+                    <AdminManageAuction />
+                  </AdminRoute>
+                }
+              ></Route>
 
-
+              <Route
+                path="/admin/manageAuction/:id"
+                element={
+                  <AdminRoute>
+                    <AuctionEditScreen />
+                  </AdminRoute>
+                }
+              ></Route>
 
               <Route
                 path="/admin/product/:id"
