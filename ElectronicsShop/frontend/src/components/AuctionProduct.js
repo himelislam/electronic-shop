@@ -7,6 +7,7 @@ import '../index.css'
 
 const AuctionProduct = (props) => {
     const { product } = props;
+    console.log(product ,'ok this is individual product');
 
     const { state, dispatch: ctxDispatch } = useContext(Store);
     const {
@@ -45,10 +46,10 @@ const AuctionProduct = (props) => {
                                 userInfo === null ? (<Link className='text-decoration-none' to={`/signin`}>
                                     <button>Bid Now</button>
                                 </Link>) : (userInfo.isAdmin ? (
-                                    <Link to='/admin/products'> <button class="button btn btn-warning btn-sm mt-2 homecardbtn" type="button">Edit Product</button></Link>
+                                    <Link to='/admin/manage'> <button class="button btn btn-warning btn-sm mt-2 homecardbtn" type="button">Edit Product</button></Link>
                                 ) : (
 
-                                    <Link className='text-decoration-none' to={`/auctionproduct/${product.slug}`}>
+                                    <Link className='text-decoration-none' to={`/manageAuction/${product.slug}`}>
                                         <button>Bid Now</button>
                                     </Link>
 
