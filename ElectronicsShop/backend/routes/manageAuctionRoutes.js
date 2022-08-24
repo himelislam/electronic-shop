@@ -1,5 +1,6 @@
 import express from 'express';
 import expressAsyncHandler from 'express-async-handler';
+// import Product from '../models/productModel.js';
 import ManageAuction from '../models/manageAuctionModel.js';
 import { isAuth, isAdmin } from '../utils.js';
 
@@ -83,7 +84,6 @@ manageAuctionRouter.post(
           .status(400)
           .send({ message: 'You already submitted a review' });
       }
-
 
       const review = {
         name: req.user.name,

@@ -49,6 +49,7 @@ import auth from './firebase.init';
 import { signOut } from 'firebase/auth';
 import AdminManageAuction from './screens/AdminManageAuction';
 import AuctionEditScreen from './screens/AuctionEditScreen';
+import AllAuctionScreen from './screens/AllAuctionScreen';
 
 function App() {
   const { state, dispatch: ctxDispatch } = useContext(Store);
@@ -131,8 +132,8 @@ function App() {
                     About Us
                   </Link>
                   {userInfo && (
-                    <Link to="/reviews" className="nav-link text-light">
-                      Review
+                    <Link to="/allAuction" className="nav-link text-light">
+                      Auction
                     </Link>
                   )
 
@@ -202,6 +203,7 @@ function App() {
               <Route path="/auctionproduct/:slug" element={<AuctionProductScreen />} />
               <Route path="/cart" element={<ProtectedRoute><CartScreen /></ProtectedRoute>} />
               <Route path="/search" element={<SearchScreen />} />
+              <Route path="/allAuction" element={<AllAuctionScreen />} />
               <Route path="/signin" element={<SigninScreen />} />
               <Route path="/signup" element={<SignupScreen />} />
               <Route path="/products" element={<AllProducts />} />

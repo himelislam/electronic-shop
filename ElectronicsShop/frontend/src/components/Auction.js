@@ -38,31 +38,13 @@ const Auction = () => {
         };
         fetchData();
     }, []);
-console.log(products);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+console.log(products, 'proooororo');
 
     return (
         <div className='container mt-5'>
             <h1 className='text-center'><span>AUCTION</span> <span className='text-danger'>PRODUCTS</span></h1>
             <Row>
-                {products.map((product) => (
+                {products?.slice(0, 8).map((product) => (
                     <Col key={product.slug} sm={12} lg={6} className="mb-3">
                         <AuctionProduct product={product}></AuctionProduct>
                     </Col>

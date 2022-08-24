@@ -49,7 +49,7 @@ const AuctionProduct = (props) => {
                                     <Link to='/admin/manage'> <button class="button btn btn-warning btn-sm mt-2 homecardbtn" type="button">Edit Product</button></Link>
                                 ) : (
 
-                                    <Link className='text-decoration-none' to={`/manageAuction/${product.slug}`}>
+                                    <Link className='text-decoration-none' to={`/auctionproduct/${product.slug}`}>
                                         <button>Bid Now</button>
                                     </Link>
 

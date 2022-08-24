@@ -187,13 +187,13 @@ export default function SearchScreen() {
             <MessageBox variant="danger">{error}</MessageBox>
           ) : (
             <>
-              {products.length === 0 && (
+              {products?.length === 0 && (
                 <MessageBox>No Product Found</MessageBox>
               )}
               <SearchBox></SearchBox>
               <Row>
 
-                {products.map((product) => (
+                {products?.map((product) => (
                   <Col xs={6} lg={3} className="mb-3" key={product._id}>
                     <ProductSearch2 product={product}></ProductSearch2>
 

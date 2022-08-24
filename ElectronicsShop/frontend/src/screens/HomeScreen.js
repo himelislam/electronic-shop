@@ -105,6 +105,15 @@ function HomeScreen() {
       <br />
 
       <Auction></Auction>
+
+      <br/>
+
+      <div className='text-center mt-5'>
+        <Link to='/allAuction'>
+          <button className='btn btn-warning '>See More </button>
+        </Link>
+      </div>
+  
      
 
       <div className='mt-5'>

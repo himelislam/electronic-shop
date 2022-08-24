@@ -197,7 +197,8 @@ export default function AdminManageAuction() {
                       <th scope="col">IMAGE</th>
                       <th scope="col">NAME</th>
                       <th scope="col">PRICE</th>
-                      <th scope="col">CATEGORY</th>
+                      <th scope="col">Bidded User</th>
+                      <th scope="col">Bidded Price</th>
                       <th scope="col">ACTIONS</th>
                     </tr>
                   </thead>
@@ -208,7 +209,8 @@ export default function AdminManageAuction() {
                         <td> <img style={{ width: '40px', height: '40px' }} src={product.image} alt="" /> </td>
                         <td>{product.name}</td>
                         <td>{product.price}</td>
-                        <td>{product.category}</td>
+                        <td>{product?.biddedUser}</td>
+                        <td>{product?.biddedPrice}</td>
                         <td>
                           <Button
                             type="button"
