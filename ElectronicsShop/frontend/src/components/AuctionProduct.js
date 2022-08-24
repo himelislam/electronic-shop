@@ -44,7 +44,6 @@ const AuctionProduct = (props) => {
                             <p class="card-text"><CountDownTimer targetDate={product.time}/></p>
 
                             {
-
                                 userInfo === null ? (<Link className='text-decoration-none' to={`/signin`}>
                                     <button>Bid Now</button>
                                 </Link>) : (userInfo.isAdmin ? (
@@ -54,14 +53,8 @@ const AuctionProduct = (props) => {
                                     <Link className='text-decoration-none' to={`/auctionproduct/${product.slug}`}>
                                         <button>Bid Now</button>
                                     </Link>
-
                                 ))
                             }
-
-
-
-
-
                         </div>
                     </div>
 

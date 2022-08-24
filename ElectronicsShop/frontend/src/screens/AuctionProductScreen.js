@@ -49,6 +49,8 @@ const AuctionProductScreen = () => {
 
     console.log(slug, 'under')
 
+    const [isReload, setIsReload] = useState(false)
+
     const [{ loading, error, product }, dispatch] =
         useReducer(reducer, {
 
@@ -68,7 +70,7 @@ const AuctionProductScreen = () => {
             }
         };
         fetchData();
-    }, [slug]);
+    }, [slug, isReload]);
 
     console.log(product, 'sluged')
 
@@ -117,6 +119,7 @@ const AuctionProductScreen = () => {
             type: 'UPDATE_SUCCESS',
           });
           toast.success('Product updated successfully');
+          setIsReload(!isReload);
         //   navigate('/admin/products');
         } catch (err) {
           toast.error(getError(err));
@@ -126,25 +129,15 @@ const AuctionProductScreen = () => {
       };
 
 
-
-
-
-
-
-
-
-
-
     const biddingPrice = (event) => {
         const bid = event.target.value;
         setBiddedPrice(bid);
     }
 
-    // loading ? (
-    //     <LoadingBox />
-    // ) : error ? (
-    //     <MessageBox variant="danger">{error}</MessageBox>
-    // ) : (
+    // const handleBiddingTime = () =>{
+    //     console.log('timeout boss')
+    //     console.log('heii heiii')
+    // }
 
     return (
         <div className='container'>
@@ -178,7 +171,7 @@ const AuctionProductScreen = () => {
                             {/* <textarea   type='number' class="form-control"  rows="1" onChange={()=>biddingPrice()} ></textarea> */}
                             <input {...register("auction")} type='number' className='form-control' id="exampleFormControlTextarea1" onChange={biddingPrice}></input>
                             <br />
-                            <button type='submit' className='w-25 btn btn-danger' disabled={product?.price < biddedPrice && product?.biddedPrice ? false : true } >Bid</button>
+                            <button type='submit' className='w-25 btn btn-danger' disabled={product?.price || biddedPrice ? false : true } >Bid</button>
                         </div>
                         </form> 
                     </div>
@@ -189,3 +182,5 @@ const AuctionProductScreen = () => {
 };
 
 export default AuctionProductScreen;
+
+// product?.price || biddedPrice ? false : true 
