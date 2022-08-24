@@ -46,17 +46,21 @@ const AuctionProductScreen = () => {
     const params = useParams();
     const { slug } = params;
 
+    console.log(slug, 'under')
+
     const [{ loading, error, product }, dispatch] =
         useReducer(reducer, {
 
             loading: true,
             error: '',
         });
+
+
     useEffect(() => {
         const fetchData = async () => {
             dispatch({ type: 'FETCH_REQUEST' });
             try {
-                const result = await axios.get(`/api/products/slug/${slug}`);
+                const result = await axios.get(`/api/manageAuction/slug/${slug}`);
                 dispatch({ type: 'FETCH_SUCCESS', payload: result.data });
             } catch (err) {
                 dispatch({ type: 'FETCH_FAIL', payload: getError(err) });
@@ -64,6 +68,8 @@ const AuctionProductScreen = () => {
         };
         fetchData();
     }, [slug]);
+
+    console.log(product, 'sluged')
 
     const { state, dispatch: ctxDispatch } = useContext(Store);
     const { cart, userInfo } = state;
@@ -92,42 +98,44 @@ const AuctionProductScreen = () => {
         setBiddedPrice(bid);
     }
 
-    return loading ? (
-        <LoadingBox />
-    ) : error ? (
-        <MessageBox variant="danger">{error}</MessageBox>
-    ) : (
+    // loading ? (
+    //     <LoadingBox />
+    // ) : error ? (
+    //     <MessageBox variant="danger">{error}</MessageBox>
+    // ) : (
+
+    return (
         <div className='container'>
             <Helmet>
-                <title>{product.name}</title>
+                <title>{product?.name}</title>
             </Helmet>
             <div class="card mb-5">
                 <div class="container-fliud">
                     <div class="wrapper row">
                         <div class="preview col-md-6">
-
                             <div class="preview-pic tab-content">
-                                <div class="tab-pane active w-100" id="pic-1"><img src={selectedImage || product.image} alt={product.name} /></div>
+                                <div class="tab-pane active w-100" id="pic-1"><img src={selectedImage || product?.image} alt={product?.name} /></div>
+                                <h1>Hellllo {slug} {product?.name}</h1>
                             </div>
                         </div>
                         <form class="details col-md-6" onSubmit={handleSubmit(onSubmit)}>
                         <div >
-                            <h3  class="product-title">{product.name}</h3>
+                            <h3  class="product-title">{product?.name}</h3>
                             <div class="rating">
                                 <div class="stars">
-                                    <div class="ratings">  <Rating rating={product.rating} numReviews={product.numReviews} />
+                                    <div class="ratings">  <Rating rating={product?.rating} numReviews={product?.numReviews} />
                                     </div>
                                 </div>
 
                             </div>
-                            <p class="product-description">{product.description}</p>
-                            <input style={{display:'none'}}  {...register("name")} value={userInfo.name} ></input>
-                            <input style={{display:'none'}}  {...register("proName")} value={product.name} ></input>
-                            <h4 class="price">current price: <span>৳{product.price}</span></h4>
+                            <p class="product-description">{product?.description}</p>
+                            <input style={{display:'none'}}  {...register("name")} value={userInfo?.name} ></input>
+                            <input style={{display:'none'}}  {...register("proName")} value={product?.name} ></input>
+                            <h4 class="price">current price: <span>৳{product?.price}</span></h4>
                             {/* <textarea   type='number' class="form-control"  rows="1" onChange={()=>biddingPrice()} ></textarea> */}
                             <input {...register("auction")} type='number' className='form-control' id="exampleFormControlTextarea1" onChange={biddingPrice}></input>
                             <br />
-                            <button type='submit' className='w-25 btn btn-danger' disabled={product.price < biddedPrice ? false : true } >Bid</button>
+                            <button type='submit' className='w-25 btn btn-danger' disabled={product?.price < biddedPrice ? false : true } >Bid</button>
                         </div>
                         </form> 
                     </div>

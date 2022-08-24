@@ -27,6 +27,7 @@ const AuctionProduct = (props) => {
             payload: { ...item, quantity },
         });
     };
+    console.log(product, 'id')
     return (
         <div>
             <div class="card homecard" >

@@ -219,13 +219,15 @@ manageAuctionRouter.get(
 );
 
 manageAuctionRouter.get('/slug/:slug', async (req, res) => {
-  const product = await manageAuction.findOne({ slug: req.params.slug });
+  const product = await ManageAuction.findOne({ slug: req.params.slug });
   if (product) {
     res.send(product);
   } else {
     res.status(404).send({ message: 'Product Not Found' });
   }
 });
+
+
 manageAuctionRouter.get('/:id', async (req, res) => {
   const product = await ManageAuction.findById(req.params.id);
   if (product) {
