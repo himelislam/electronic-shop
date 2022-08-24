@@ -69,6 +69,10 @@ export default function AdminManageAuction() {
     error: '',
   });
 
+  
+  
+    // `/api/manageAuction/admin?page=${page} `
+
   const navigate = useNavigate();
   const { search } = useLocation();
   const sp = new URLSearchParams(search);
@@ -89,12 +93,19 @@ export default function AdminManageAuction() {
       } catch (err) { }
     };
 
-    if (successDelete) {
-      dispatch({ type: 'DELETE_RESET' });
-    } else {
-      fetchData();
-    }
-  }, [page, userInfo, successDelete]);
+  if (successDelete) {
+    dispatch({ type: 'DELETE_RESET' });
+  } else {
+    fetchData();
+  }
+}, [page, userInfo, successDelete]);
+
+  console.log(products, 'from admin manage auction')
+
+  // useEffect(()=>{
+  //   const {data} = axios.get('/allauction')
+  //   console.log(data, 'axioessss');
+  // },[])
 
 
   const createHandler = async () => {
@@ -158,8 +169,6 @@ export default function AdminManageAuction() {
         </div>
 
         <div className="col-md-10 col-8">
-
-
           <div className='container my-3 py-3' style={{ boxShadow: "rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px" }}>
             <Row>
 
@@ -193,7 +202,9 @@ export default function AdminManageAuction() {
                     </tr>
                   </thead>
                   <tbody>
+
                     {/* console.log(products); */}
+
                     {products?.map((product) => (
                       <tr key={product._id}>
                         <td> <img style={{ width: '40px', height: '40px' }} src={product.image} alt="" /> </td>

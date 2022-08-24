@@ -34,8 +34,32 @@ async function run() {
     const database = client.db('Ecommerce');
     const reviewCollection = database.collection('review');
     // const auctionCollection = database.collection('auction');
+
     // const auction = database.collection('auctionProduct');
 
+    // get 
+    app.post('/auctionproduct', async (req, res) => {
+      const auctionProduct = req.body;
+      const result = await auction.insertOne(auctionProduct);
+      res.json(result);
+    });
+
+    // post
+    app.post('/all/auctionproduct', async (req, res) => {
+      const auctionProduct = auction.find({});
+      const result = await auctionProduct.toArray();
+      res.send(result);
+    });
+    
+
+  // const auction = database.collection('auctionProduct');
+    // const auctionCollection = database.collection('auction');
+
+    app.get('/manageAuction', async(req, res) => {
+      const auctionProducts = await auctionCollection.find();
+      res.send(auctionProducts);
+    })
+    
     app.post('/review', async (req, res) => {
       const review = req.body;
       const result = await reviewCollection.insertOne(review);
@@ -71,30 +95,76 @@ async function run() {
     // });
 
 
-    // app.post('/auction', async (req, res) => {
-    //   const review = req.body;
-    //   const result = await auctionCollection.insertOne(review);
-    //   res.json(result);
+//     app.post('/auction', async (req, res) => {
+//       const review = req.body;
+//       const result = await auctionCollection.insertOne(review);
+//       res.json(result);
 
+// <<<<<<< HEAD
+//     });
+// =======
     // });
+// >>>>>>> 1769e7be3940638cdb4fc902ff7c15a9d54156ee
     // app.post('/all/auction', async (req, res) => {
     //   const cursor = auctionCollection.find({});
     //   const result = await cursor.toArray();
     //   res.send(result);
 
     // });
-    // app.delete('/auction/:id', async (req, res) => {
-    //   const id = req.params.id;
-    //   const query = { _id: ObjectId(id) };
-    //   const result = await auctionCollection.deleteOne(query);
-    //   res.json(result);
+// <<<<<<< HEAD
+
+    // app.get('/allauction', async(req, res) => {
+    //   const auctions = await auctionCollection.find({}).toArray();
+    //   console.log(auctions)
+    //   res.send(auctions);
+    // })
+
+
+    // post
+    app.post('/all/auctionproduct', async (req, res) => {
+      const auctionProduct = auction.find({});
+      const result = await auctionProduct.toArray();
+      res.send(result);
+    });
+    
+    // get 
+    app.post('/auctionproduct', async (req, res) => {
+      const auctionProduct = req.body;
+      const result = await auction.insertOne(auctionProduct);
+      res.json(result);
+    });
+
+
+
+
+
+    app.get('/allauction', async (req, res) => {
+      const cursor = auctionCollection.find({});
+      const result = await cursor.toArray();
+      console.log('Hello')
+      res.send(result);
+    });
+    
+//     app.delete('/auction/:id', async (req, res) => {
+//       const id = req.params.id;
+//       const query = { _id: ObjectId(id) };
+//       const result = await auctionCollection.deleteOne(query);
+//       res.json(result);
+// =======}
+//     app.delete('/auction/:id', async (req, res) => {
+//       const id = req.params.id;
+//       const query = { _id: ObjectId(id) };
+//       const result = await auctionCollection.deleteOne(query);
+//       res.json(result);
+//     }
+// >>>>>>> 1769e7be3940638cdb4fc902ff7c15a9d54156ee
 
     // });
 
 
   }
   finally {
-    // await client.close();
+    await client.close();
   }
 };
 run().catch(console.dir);

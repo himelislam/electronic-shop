@@ -20,7 +20,7 @@ const reducer = (state, action) => {
 };
 
 const Auction = () => {
-    const [{ loading, error, products }, dispatch] = useReducer(logger(reducer), {
+    const [{ products }, dispatch] = useReducer(logger(reducer), {
         products: [],
         loading: true,
         error: '',
@@ -39,6 +39,24 @@ const Auction = () => {
         fetchData();
     }, []);
 console.log(products);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     return (
         <div className='container mt-5'>

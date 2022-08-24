@@ -95,6 +95,8 @@ export default function ProductListScreen() {
     }
   }, [page, userInfo, successDelete]);
 
+  console.log(products, 'from product list')
+
   const createHandler = async () => {
     if (window.confirm('Are you sure to create?')) {
       try {
