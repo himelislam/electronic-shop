@@ -33,13 +33,15 @@ const app = express();
 app.use(cors())
 
 const client = new MongoClient(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true });
+
 async function run() {
   try {
     await client.connect();
     const database = client.db('Ecommerce');
     const reviewCollection = database.collection('review');
-     const auction = database.collection('auctionProduct');
- 
+    const auctionCollection = database.collection('auction');
+    const auction = database.collection('auctionProduct');
+    
 
     // get 
     app.post('/auctionproduct', async (req, res) => {
@@ -82,6 +84,21 @@ async function run() {
       res.json(result);
     });
 
+    // ---------------
+    // app.post('/auctionproduct', async (req, res) => {
+    //   const auctionProduct = req.body;
+    //   const result = await auction.insertOne(auctionProduct);
+    //   res.json(result);
+
+    // });
+
+
+    // app.post('/all/auctionproduct', async (req, res) => {
+    //   const auctionProduct = auction.find({});
+    //   const result = await auctionProduct.toArray();
+    //   res.send(result);
+    // });
+
 
 //     app.post('/auction', async (req, res) => {
 //       const review = req.body;
@@ -109,18 +126,18 @@ async function run() {
 
 
     // post
-    app.post('/all/auctionproduct', async (req, res) => {
-      const auctionProduct = auction.find({});
-      const result = await auctionProduct.toArray();
-      res.send(result);
-    });
+    // app.post('/all/auctionproduct', async (req, res) => {
+    //   const auctionProduct = auction.find({});
+    //   const result = await auctionProduct.toArray();
+    //   res.send(result);
+    // });
     
-    // get 
-    app.post('/auctionproduct', async (req, res) => {
-      const auctionProduct = req.body;
-      const result = await auction.insertOne(auctionProduct);
-      res.json(result);
-    });
+    // // get 
+    // app.post('/auctionproduct', async (req, res) => {
+    //   const auctionProduct = req.body;
+    //   const result = await auction.insertOne(auctionProduct);
+    //   res.json(result);
+    // });
 
 
 

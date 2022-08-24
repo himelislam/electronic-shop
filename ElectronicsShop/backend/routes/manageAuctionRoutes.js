@@ -35,8 +35,8 @@ manageAuctionRouter.put(
   isAuth,
   isAdmin,
   expressAsyncHandler(async (req, res) => {
-    const productId = req.params.id;
-    const manageAuction = await ManageAuction.findById(productId);
+    const auctionMannageId = req.params.id;
+    const manageAuction = await ManageAuction.findById(auctionMannageId);
     if (manageAuction) {
       manageAuction.name = req.body.name;
       manageAuction.slug = req.body.slug;
@@ -56,56 +56,57 @@ manageAuctionRouter.put(
   })
 );
 
-// manageAuctionRouter.delete(
-//   '/:id',
-//   isAuth,
-//   isAdmin,
-//   expressAsyncHandler(async (req, res) => {
-//     const manageAuction = await ManageAuction.findById(req.params.id);
-//     if (manageAuction) {
-//       await manageAuction.remove();
-//       res.send({ message: ' Auction Product Deleted' });
-//     } else {
-//       res.status(404).send({ message: 'Auction Product Not Found' });
-//     }
-//   })
-// );
+manageAuctionRouter.delete(
+  '/:id',
+  isAuth,
+  isAdmin,
+  expressAsyncHandler(async (req, res) => {
+    const manageAuction = await ManageAuction.findById(req.params.id);
+    if (manageAuction) {
+      await manageAuction.remove();
+      res.send({ message: ' Auction Product Deleted' });
+    } else {
+      res.status(404).send({ message: 'Auction Product Not Found' });
+    }
+  })
+);
 
-// manageAuctionRouter.post(
-//   '/:id/reviews',
-//   isAuth,
-//   expressAsyncHandler(async (req, res) => {
-//     const productId = req.params.id;
-//     const product = await ManageAuction.findById(productId);
-//     if (product) {
-//       if (product.reviews.find((x) => x.name === req.user.name)) {
-//         return res
-//           .status(400)
-//           .send({ message: 'You already submitted a review' });
-//       }
+manageAuctionRouter.post(
+  '/:id/reviews',
+  isAuth,
+  expressAsyncHandler(async (req, res) => {
+    const auctionMannageId = req.params.id;
+    const product = await ManageAuction.findById(auctionMannageId);
+    if (product) {
+      if (product.reviews.find((x) => x.name === req.user.name)) {
+        return res
+          .status(400)
+          .send({ message: 'You already submitted a review' });
+      }
 
-//       const review = {
-//         name: req.user.name,
-//         rating: Number(req.body.rating),
-//         comment: req.body.comment,
-//       };
-//       product.reviews.push(review);
-//       product.numReviews = product.reviews.length;
-//       product.rating =
-//         product.reviews.reduce((a, c) => c.rating + a, 0) /
-//         product.reviews.length;
-//       const updatedProduct = await product.save();
-//       res.status(201).send({
-//         message: 'Review Created',
-//         review: updatedProduct.reviews[updatedProduct.reviews.length - 1],
-//         numReviews: product.numReviews,
-//         rating: product.rating,
-//       });
-//     } else {
-//       res.status(404).send({ message: 'Product Not Found' });
-//     }
-//   })
-// );
+
+      const review = {
+        name: req.user.name,
+        rating: Number(req.body.rating),
+        comment: req.body.comment,
+      };
+      product.reviews.push(review);
+      product.numReviews = product.reviews.length;
+      product.rating =
+        product.reviews.reduce((a, c) => c.rating + a, 0) /
+        product.reviews.length;
+      const updatedProduct = await product.save();
+      res.status(201).send({
+        message: 'Review Created',
+        review: updatedProduct.reviews[updatedProduct.reviews.length - 1],
+        numReviews: product.numReviews,
+        rating: product.rating,
+      });
+    } else {
+      res.status(404).send({ message: 'Product Not Found' });
+    }
+  })
+);
 
 const PAGE_SIZE = 8;
 
@@ -131,134 +132,131 @@ manageAuctionRouter.get(
   })
 );
 
-// manageAuctionRouter.get(
-//   '/search',
-//   expressAsyncHandler(async (req, res) => {
-//     const { query } = req;
-//     const pageSize = query.pageSize || PAGE_SIZE;
-//     const page = query.page || 1;
-//     const category = query.category || '';
-//     const price = query.price || '';
-//     const rating = query.rating || '';
-//     const order = query.order || '';
-//     const searchQuery = query.query || '';
+manageAuctionRouter.get(
+  '/search',
+  expressAsyncHandler(async (req, res) => {
+    const { query } = req;
+    const pageSize = query.pageSize || PAGE_SIZE;
+    const page = query.page || 1;
+    const category = query.category || '';
+    const price = query.price || '';
+    const rating = query.rating || '';
+    const order = query.order || '';
+    const searchQuery = query.query || '';
 
-//     const queryFilter =
-//       searchQuery && searchQuery !== 'all'
-//         ? {
-//           name: {
-//             $regex: searchQuery,
-//             $options: 'i',
-//           },
-//         }
-//         : {};
-//     const categoryFilter = category && category !== 'all' ? { category } : {};
-//     const ratingFilter =
-//       rating && rating !== 'all'
-//         ? {
-//           rating: {
-//             $gte: Number(rating),
-//           },
-//         }
-//         : {};
-//     const priceFilter =
-//       price && price !== 'all'
-//         ? {
-//           // 1-50
-//           price: {
-//             $gte: Number(price.split('-')[0]),
-//             $lte: Number(price.split('-')[1]),
-//           },
-//         }
-//         : {};
-//     const sortOrder =
-//       order === 'featured'
-//         ? { featured: -1 }
-//         : order === 'lowest'
-//           ? { price: 1 }
-//           : order === 'highest'
-//             ? { price: -1 }
-//             : order === 'toprated'
-//               ? { rating: -1 }
-//               : order === 'newest'
-//                 ? { createdAt: -1 }
-//                 : { _id: -1 };
+    const queryFilter =
+      searchQuery && searchQuery !== 'all'
+        ? {
+          name: {
+            $regex: searchQuery,
+            $options: 'i',
+          },
+        }
+        : {};
+    const categoryFilter = category && category !== 'all' ? { category } : {};
+    const ratingFilter =
+      rating && rating !== 'all'
+        ? {
+          rating: {
+            $gte: Number(rating),
+          },
+        }
+        : {};
+    const priceFilter =
+      price && price !== 'all'
+        ? {
+          // 1-50
+          price: {
+            $gte: Number(price.split('-')[0]),
+            $lte: Number(price.split('-')[1]),
+          },
+        }
+        : {};
+    const sortOrder =
+      order === 'featured'
+        ? { featured: -1 }
+        : order === 'lowest'
+          ? { price: 1 }
+          : order === 'highest'
+            ? { price: -1 }
+            : order === 'toprated'
+              ? { rating: -1 }
+              : order === 'newest'
+                ? { createdAt: -1 }
+                : { _id: -1 };
 
-//     const products = await Product.find({
-//       ...queryFilter,
-//       ...categoryFilter,
-//       ...priceFilter,
-//       ...ratingFilter,
-//     })
-//       .sort(sortOrder)
-//       .skip(pageSize * (page - 1))
-//       .limit(pageSize);
+    const products = await ManageAuction.find({
+      ...queryFilter,
+      ...categoryFilter,
+      ...priceFilter,
+      ...ratingFilter,
+    })
+      .sort(sortOrder)
+      .skip(pageSize * (page - 1))
+      .limit(pageSize);
 
-//     const countProducts = await Product.countDocuments({
-//       ...queryFilter,
-//       ...categoryFilter,
-//       ...priceFilter,
-//       ...ratingFilter,
-//     });
-//     res.send({
-//       products,
-//       countProducts,
-//       page,
-//       pages: Math.ceil(countProducts / pageSize),
-//     });
-//   })
-// );
+    const countProducts = await ManageAuction.countDocuments({
+      ...queryFilter,
+      ...categoryFilter,
+      ...priceFilter,
+      ...ratingFilter,
+    });
+    res.send({
+      products,
+      countProducts,
+      page,
+      pages: Math.ceil(countProducts / pageSize),
+    });
+  })
+);
 
-// manageAuctionRouter.get(
-//   '/categories',
-//   expressAsyncHandler(async (req, res) => {
-//     const categories = await manageAuction.find().distinct('category');
-//     res.send(categories);
-//   })
-// );
+manageAuctionRouter.get(
+  '/categories',
+  expressAsyncHandler(async (req, res) => {
+    const categories = await ManageAuction.find().distinct('category');
+    res.send(categories);
+  })
+);
 
-// manageAuctionRouter.get('/slug/:slug', async (req, res) => {
-//   const manageAuction = await manageAuction.findOne({ slug: req.params.slug });
-//   if (manageAuction) {
-//     res.send(manageAuction);
-//   } else {
-//     res.status(404).send({ message: 'Product Not Found' });
-//   }
-// });
-// manageAuctionRouter.get('/:id', async (req, res) => {
-//   const manageAuction = await manageAuction.findById(req.params.id);
-//   if (manageAuction) {
-//     res.send(manageAuction);
-//   } else {
-//     res.status(404).send({ message: 'Product Not Found' });
-//   }
-// });
-
-
+manageAuctionRouter.get('/slug/:slug', async (req, res) => {
+  const product = await manageAuction.findOne({ slug: req.params.slug });
+  if (product) {
+    res.send(product);
+  } else {
+    res.status(404).send({ message: 'Product Not Found' });
+  }
+});
+manageAuctionRouter.get('/:id', async (req, res) => {
+  const product = await ManageAuction.findById(req.params.id);
+  if (product) {
+    res.send(product);
+  } else {
+    res.status(404).send({ message: 'Product Not Found' });
+  }
+});
 
 
-// manageAuctionRouter.post(
-//   '/auction',
-//   isAuth,
-//   isAdmin,
-//   expressAsyncHandler(async (req, res) => {
-//     const newProduct = new Product({
-//       name: ' ',
-//       slug: ' ',
-//       auction: ' ',
-//       image: '/images/p1.jpg',
-//       price: 0,
-//       category: ' ',
-//       brand: ' ',
-//       countInStock: 0,
-//       rating: 0,
-//       numReviews: 0,
-//       description: ' ',
-//     });
-//     const product = await newProduct.save();
-//     res.send({ message: 'Product Created', product });
-//   })
-// );
+
+
+manageAuctionRouter.post(
+  '/auction',
+  isAuth,
+  isAdmin,
+  expressAsyncHandler(async (req, res) => {
+    const newProduct = new ManageAuction({
+      name: ' ',
+      slug: ' ',
+      image: '/images/p1.jpg',
+      price: 0,
+      category: ' ',
+      brand: ' ',
+      description: ' ',
+      time: ' ',
+    });
+    const product = await newProduct.save();
+    res.send({ message: 'Product Created', product });
+  })
+);
 
 
 

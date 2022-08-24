@@ -43,7 +43,7 @@ const reducer = (state, action) => {
 export default function AuctionEditScreen() {
   const navigate = useNavigate();
   const params = useParams();
-  const { id: productId } = params;
+  const { id: auctionMannageId } = params;
 
   const { state } = useContext(Store);
   const { userInfo } = state;
@@ -68,7 +68,7 @@ export default function AuctionEditScreen() {
     const fetchData = async () => {
       try {
         dispatch({ type: 'FETCH_REQUEST' });
-        const { data } = await axios.get(`/api/manageAuction/${productId}`);
+        const { data } = await axios.get(`/api/manageAuction/${auctionMannageId}`);
 
         setName(data.name);
         setSlug(data.slug);
@@ -89,16 +89,16 @@ export default function AuctionEditScreen() {
     };
     fetchData();
 
-  }, [productId]);
+  }, [auctionMannageId]);
 
   const submitHandler = async (e) => {
     e.preventDefault();
     try {
       dispatch({ type: 'UPDATE_REQUEST' });
       await axios.put(
-        `/api/manageAuction/${productId}`,
+        `/api/manageAuction/${auctionMannageId}`,
         {
-          _id: productId,
+          _id: auctionMannageId,
           name,
           slug,
           price,
@@ -107,7 +107,7 @@ export default function AuctionEditScreen() {
           category,
           brand,
           description,
-          time
+          time,
         },
         {
           headers: { Authorization: `Bearer ${userInfo.token}` },
@@ -245,11 +245,11 @@ export default function AuctionEditScreen() {
                     required
                   />
                 </Form.Group>
-                {/* countdown add */}
+                {/* time add */}
                 <Form.Group className="mb-3" controlId="time">
-                  <Form.Label>Time</Form.Label>
+                  <Form.Label>Date and Time</Form.Label>
                   <Form.Control
-                  type='datetime-local'
+                    type='datetime-local'
                     value={time}
                     onChange={(e) => setTime(e.target.value)}
                     required
