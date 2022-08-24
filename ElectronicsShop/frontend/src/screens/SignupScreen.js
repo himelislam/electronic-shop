@@ -74,7 +74,7 @@ console.log(error3)
     const password = data2.password;
     const confirmPassword = data2.confirmPassword;
     if (password !== confirmPassword) {
-      toast.error('Passwords do not match');
+      toast.error('Password and Confirm Password are not match');
       return;
     }
     await updateProfile({displayName:name});
@@ -218,7 +218,7 @@ console.log(error3)
                                       message: 'Provide 8 characters, at least 1 letter, 1 number and 1 special character!'
                                   }
                                 })}
-                            /><i className='eyePlace' onClick={togglePasswordVisiblity2}>{eye2}</i>
+                            /><i className='eyePlace' onClick={togglePasswordVisiblity2}>{eye2}</i><br></br>
                             <label className="label">
                                 {errors.password?.type === 'required' && <span className="label-text-alt text-danger">{errors.password.message}</span>}
                                 {errors.password?.type === 'minLength' && <span className="label-text-alt text-danger">{errors.password.message}</span>}
