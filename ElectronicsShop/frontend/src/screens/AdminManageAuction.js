@@ -1,3 +1,11 @@
+
+
+
+
+
+
+
+
 import React, { useContext, useEffect, useReducer, useState } from 'react';
 import axios from 'axios';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
@@ -69,6 +77,35 @@ export default function AdminManageAuction() {
     error: '',
   });
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
   const navigate = useNavigate();
   const { search } = useLocation();
   const sp = new URLSearchParams(search);
@@ -90,6 +127,8 @@ export default function AdminManageAuction() {
   //   .then(res => res.json()) 
   //   .then(data => setProducts1(data)) 
   // }, [])
+
+  // // console.log(products1, 'here');
 
 
 
@@ -197,6 +236,43 @@ useEffect(() => {
         </div>
 
         <div className="col-md-10 col-8">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
           <div className='container my-3 py-3' style={{ boxShadow: "rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px" }}>
