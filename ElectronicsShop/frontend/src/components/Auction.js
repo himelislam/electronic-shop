@@ -20,7 +20,7 @@ const reducer = (state, action) => {
 };
 
 const Auction = () => {
-    const [{ loading, error, products }, dispatch] = useReducer(logger(reducer), {
+    const [{ products }, dispatch] = useReducer(logger(reducer), {
         products: [],
         loading: true,
         error: '',
@@ -57,7 +57,7 @@ const Auction = () => {
 
 
 
-    
+
     return (
         <div className='container mt-5'>
             <h1 className='text-center'><span>AUCTION</span> <span className='text-danger'>PRODUCTS</span></h1>

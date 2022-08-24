@@ -1,12 +1,4 @@
-
-
-
-
-
-
-
-
-import React, { useContext, useEffect, useReducer, useState } from 'react';
+import React, { useContext, useEffect, useReducer  } from 'react';
 import axios from 'axios';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import Row from 'react-bootstrap/Row';
@@ -79,33 +71,8 @@ export default function AdminManageAuction() {
 
   
   
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
+    // `/api/manageAuction/admin?page=${page} `
+
   const navigate = useNavigate();
   const { search } = useLocation();
   const sp = new URLSearchParams(search);
@@ -113,42 +80,6 @@ export default function AdminManageAuction() {
 
   const { state } = useContext(Store);
   const { userInfo } = state;
-
-  // `/api/manageAuction/admin?page=${page} `
-
-  // console.log(data)
-  // const [da]
-
-  // const [products1, setProducts1] = useState([]); 
-  
-  // useEffect(() => { 
-  //   const url = '/allauction' 
-  //   fetch(url) 
-  //   .then(res => res.json()) 
-  //   .then(data => setProducts1(data)) 
-  // }, [])
-
-  // // console.log(products1, 'here');
-
-
-
-  // const [reviews, setReviews] = useState([]);
-
-  //   useEffect(() => {
-  //       // axios.get('http://localhost:5000/allauction').then((response) => {
-  //       //     setReviews(response.data);
-  //       // });
-
-  //       axios
-  // .get("http://localhost:5000/allauction")
-  // .then(function (response) {
-  //   console.log(response.data, 'data found');
-  //   setReviews(response.data)
-  // });
-  //   }, []);
-
-    
-// console.log(reviews, 'hellald asda asd');
 
 useEffect(() => {
   const fetchData = async () => {
@@ -236,45 +167,6 @@ useEffect(() => {
         </div>
 
         <div className="col-md-10 col-8">
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
           <div className='container my-3 py-3' style={{ boxShadow: "rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px" }}>
             <Row>
 
