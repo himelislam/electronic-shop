@@ -14,6 +14,7 @@ import { toast } from 'react-toastify';
 import '../index.css'
 import { useForm } from 'react-hook-form';
 import { isDisabled } from '@testing-library/user-event/dist/utils';
+import CountDownTimer from '../components/Countdown/CountdownTimer';
 
 
 
@@ -82,16 +83,57 @@ const AuctionProductScreen = () => {
     const [biddedPrice, setBiddedPrice] = useState();
     
 
-    const onSubmit = data => {
-        console.log(data);
-        axios.post('/auction', data)
-            .then(res => {
-                if (res.data.insertedId) {
-                    alert('Bidding Successfull');
-                    reset();
-                }
-            })
-    };
+    // const onSubmit = data => {
+    //     console.log(data, userInfo, 'chill');
+
+        
+    //     // axios.post('/auction', data)
+    //     //     .then(res => {
+    //     //         if (res.data.insertedId) {
+    //     //             alert('Bidding Successfull');
+    //     //             reset();
+    //     //         }
+    //     //     })
+    // };
+
+    const onSubmit = async (e) => {
+        const productId = product._id;
+        const biddedUser = userInfo.name;
+        console.log('user Id',  product._id)
+        try {
+          dispatch({ type: 'UPDATE_REQUEST' });
+          await axios.put(
+            `/api/manageAuction/user/${productId}`,
+            {
+              _id: productId,
+              biddedUser,
+              biddedPrice,
+            },
+            {
+              headers: { Authorization: `Bearer ${userInfo.token}` },
+            }
+          );
+          dispatch({
+            type: 'UPDATE_SUCCESS',
+          });
+          toast.success('Product updated successfully');
+        //   navigate('/admin/products');
+        } catch (err) {
+          toast.error(getError(err));
+          dispatch({ type: 'UPDATE_FAIL' });
+          console.log('not updated')
+        }
+      };
+
+
+
+
+
+
+
+
+
+
 
     const biddingPrice = (event) => {
         const bid = event.target.value;
@@ -115,7 +157,6 @@ const AuctionProductScreen = () => {
                         <div class="preview col-md-6">
                             <div class="preview-pic tab-content">
                                 <div class="tab-pane active w-100" id="pic-1"><img src={selectedImage || product?.image} alt={product?.name} /></div>
-                                <h1>Hellllo {slug} {product?.name}</h1>
                             </div>
                         </div>
                         <form class="details col-md-6" onSubmit={handleSubmit(onSubmit)}>
@@ -126,16 +167,18 @@ const AuctionProductScreen = () => {
                                     <div class="ratings">  <Rating rating={product?.rating} numReviews={product?.numReviews} />
                                     </div>
                                 </div>
-
+                                <p class="card-text"><CountDownTimer targetDate={product?.time}/></p>
                             </div>
                             <p class="product-description">{product?.description}</p>
                             <input style={{display:'none'}}  {...register("name")} value={userInfo?.name} ></input>
                             <input style={{display:'none'}}  {...register("proName")} value={product?.name} ></input>
                             <h4 class="price">current price: <span>৳{product?.price}</span></h4>
+                            <h4 class="price">Bidded User: <span>{product?.biddedUser}</span></h4>
+                            <h4 class="price">Bidded Price: <span>৳{product?.biddedPrice}</span></h4>
                             {/* <textarea   type='number' class="form-control"  rows="1" onChange={()=>biddingPrice()} ></textarea> */}
                             <input {...register("auction")} type='number' className='form-control' id="exampleFormControlTextarea1" onChange={biddingPrice}></input>
                             <br />
-                            <button type='submit' className='w-25 btn btn-danger' disabled={product?.price < biddedPrice ? false : true } >Bid</button>
+                            <button type='submit' className='w-25 btn btn-danger' disabled={product?.price < biddedPrice && product?.biddedPrice ? false : true } >Bid</button>
                         </div>
                         </form> 
                     </div>

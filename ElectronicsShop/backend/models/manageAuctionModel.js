@@ -23,6 +23,8 @@ const manageAuctionSchema = new mongoose.Schema(
     description: { type: String, required: true },
     price: { type: Number, required: true },
     time: { type: String, required: true },
+    biddedPrice : {type: Number},
+    biddedUser : {type: String}
     
   },
   {

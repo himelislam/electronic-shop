@@ -62,6 +62,8 @@ export default function AuctionEditScreen() {
   const [brand, setBrand] = useState('');
   const [description, setDescription] = useState('');
   const [time, setTime] = useState('');
+  const biddedPrice = 0;
+  const biddedUser = '';
 
 
   useEffect(() => {
@@ -108,6 +110,8 @@ export default function AuctionEditScreen() {
           brand,
           description,
           time,
+          biddedPrice,
+          biddedUser,
         },
         {
           headers: { Authorization: `Bearer ${userInfo.token}` },

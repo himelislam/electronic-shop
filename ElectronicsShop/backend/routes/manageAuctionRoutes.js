@@ -34,7 +34,6 @@ manageAuctionRouter.post(
 manageAuctionRouter.put(
   '/:id',
   isAuth,
-  isAdmin,
   expressAsyncHandler(async (req, res) => {
     const auctionMannageId = req.params.id;
     const manageAuction = await ManageAuction.findById(auctionMannageId);
@@ -48,6 +47,27 @@ manageAuctionRouter.put(
       manageAuction.brand = req.body.brand;
       manageAuction.description = req.body.description;
       manageAuction.time = req.body.time;
+      manageAuction.biddedPrice = req.body.biddedPrice;
+      manageAuction.biddedUser = req.body.biddedUser;
+
+      await manageAuction.save();
+      res.send({ message: 'Auction Product Updated' });
+    } else {
+      res.status(404).send({ message: 'Auction Product Not Found' });
+    }
+  })
+);
+
+
+manageAuctionRouter.put(
+  '/user/:id',
+  isAuth,
+  expressAsyncHandler(async (req, res) => {
+    const auctionMannageId = req.params.id;
+    const manageAuction = await ManageAuction.findById(auctionMannageId);
+    if (manageAuction) {
+      manageAuction.biddedPrice = req.body.biddedPrice;
+      manageAuction.biddedUser = req.body.biddedUser;
 
       await manageAuction.save();
       res.send({ message: 'Auction Product Updated' });

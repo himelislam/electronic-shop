@@ -3,7 +3,8 @@ import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { Store } from '../Store';
 import Rating from './Rating';
-import '../index.css'
+import '../index.css';
+import CountDownTimer from './Countdown/CountdownTimer';
 
 const AuctionProduct = (props) => {
     const { product } = props;
@@ -40,7 +41,7 @@ const AuctionProduct = (props) => {
                             <h5 class="card-title">{product.name}</h5>
 
                             <p class="card-text">৳{product.price}</p>
-
+                            <p class="card-text"><CountDownTimer targetDate={product.time}/></p>
 
                             {
 
