@@ -34,7 +34,7 @@ async function run() {
     const reviewCollection = database.collection('review');
     // const auctionCollection = database.collection('auction');
     const auction = database.collection('auctionProduct');
-
+    
 
     // get 
     app.post('/auctionproduct', async (req, res) => {
@@ -49,8 +49,10 @@ async function run() {
       const result = await auctionProduct.toArray();
       res.send(result);
     });
+    
 
-
+  // const auction = database.collection('auctionProduct');
+    // const auctionCollection = database.collection('auction');
 
     app.get('/manageAuction', async(req, res) => {
       const auctionProducts = await auctionCollection.find();
@@ -100,6 +102,25 @@ async function run() {
     //   console.log(auctions)
     //   res.send(auctions);
     // })
+
+
+    // post
+    app.post('/all/auctionproduct', async (req, res) => {
+      const auctionProduct = auction.find({});
+      const result = await auctionProduct.toArray();
+      res.send(result);
+    });
+    
+    // get 
+    app.post('/auctionproduct', async (req, res) => {
+      const auctionProduct = req.body;
+      const result = await auction.insertOne(auctionProduct);
+      res.json(result);
+    });
+
+
+
+
 
     app.get('/allauction', async (req, res) => {
       const cursor = auctionCollection.find({});
