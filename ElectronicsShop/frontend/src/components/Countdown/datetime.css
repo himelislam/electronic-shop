@@ -69,8 +69,14 @@
   }
   
   .show-counter .countdown > p {
-    margin: 50 0 0 0;
+    margin: 25 0 0 0;
+    font-size:  20px;
   }
+
+.dott {
+    font-size: 25px;
+    margin: 0 0 50px ;
+  } 
   
   .show-counter .countdown > span {
     text-transform: uppercase;

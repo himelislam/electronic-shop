@@ -2,7 +2,7 @@ import axios from 'axios';
 import { useContext, useEffect, useReducer, useRef, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 
-
+import '../index.css'
 import Rating from '../components/Rating';
 import { Helmet } from 'react-helmet-async';
 import LoadingBox from '../components/LoadingBox';
@@ -162,23 +162,20 @@ const AuctionProductScreen = () => {
                         <form class="details col-md-6" onSubmit={handleSubmit(onSubmit)}>
                         <div >
                             <h3  class="product-title">{product?.name}</h3>
-                            <div class="rating">
-                                <div class="stars">
-                                    <div class="ratings">  <Rating rating={product?.rating} numReviews={product?.numReviews} />
-                                    </div>
-                                </div>
+                            <div class="">
+                                
                                 <p class="card-text"><CountDownTimer targetDate={product?.time}/></p>
                             </div>
                             <p class="product-description">{product?.description}</p>
                             <input style={{display:'none'}}  {...register("name")} value={userInfo?.name} ></input>
                             <input style={{display:'none'}}  {...register("proName")} value={product?.name} ></input>
-                            <h4 class="price">current price: <span>৳{product?.price}</span></h4>
-                            <h4 class="price">Bidded User: <span>{product?.biddedUser}</span></h4>
-                            <h4 class="price">Bidded Price: <span>৳{product?.biddedPrice}</span></h4>
+                            <h4 class="price">Current price: <span>৳{product?.price}</span></h4>
+                            <h4 class="price">Update Bidder: <span>{product?.biddedUser}</span></h4>
+                            <h4 class="price">Update Price: <span>৳{product?.biddedPrice}</span></h4>
                             {/* <textarea   type='number' class="form-control"  rows="1" onChange={()=>biddingPrice()} ></textarea> */}
                             <input {...register("auction")} type='number' className='form-control' id="exampleFormControlTextarea1" onChange={biddingPrice}></input>
                             <br />
-                            <button type='submit' className='w-25 btn btn-danger' disabled={product?.price < biddedPrice && product?.biddedPrice ? false : true } >Bid</button>
+                            <button type='submit' className='w-25 btn btn-warning text-black text-bold' disabled={ (product?.price <  biddedPrice) && product?.biddedPrice ? false : true } >Bid</button>
                         </div>
                         </form> 
                     </div>
@@ -189,3 +186,6 @@ const AuctionProductScreen = () => {
 };
 
 export default AuctionProductScreen;
+
+// product?.price < biddedPrice && product?.biddedPrice ? false : true 
+// (product?.price  && (product?.biddedPrice === 0)) ? false : ((product?.price < product?.biddedPrice) && product?.biddedPrice) ? false : true
