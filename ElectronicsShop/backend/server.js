@@ -24,6 +24,12 @@ mongoose.connect(process.env.MONGODB_URI)
 
 const app = express();
 
+// const auction = database.collection('auctionProduct');
+    // const auctionCollection = database.collection('auction');
+    // // const auctionCollection = database.collection('auction');
+    // const auction = database.collection('auctionProduct');
+    
+
 app.use(cors())
 
 const client = new MongoClient(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true });
@@ -32,9 +38,8 @@ async function run() {
     await client.connect();
     const database = client.db('Ecommerce');
     const reviewCollection = database.collection('review');
-    // const auctionCollection = database.collection('auction');
-    const auction = database.collection('auctionProduct');
-    
+     const auction = database.collection('auctionProduct');
+ 
 
     // get 
     app.post('/auctionproduct', async (req, res) => {
@@ -51,8 +56,7 @@ async function run() {
     });
     
 
-  // const auction = database.collection('auctionProduct');
-    // const auctionCollection = database.collection('auction');
+  
 
     app.get('/manageAuction', async(req, res) => {
       const auctionProducts = await auctionCollection.find();
