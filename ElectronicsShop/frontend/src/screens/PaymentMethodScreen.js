@@ -35,9 +35,9 @@ export default function PaymentMethodScreen() {
           <title>Payment</title>
         </Helmet>
         <div class="container3">
-          <img src="https://blog.mozilla.org/wp-content/blogs.dir/278/files/2018/11/Black-Friday-Headline.png" alt="Snow" />
+          <img src="https://static.vecteezy.com/system/resources/previews/002/836/691/original/online-bill-payment-vector.jpg" height='250px' width='500px' alt="Snow"/>
           <Form onSubmit={submitHandler}>
-            <button onChange={(e) => setPaymentMethod(e.target.value)} type="submit" className="btn">Payment
+            <button onChange={(e) => setPaymentMethod(e.target.value)} type="submit" className="btn bg-warning text-bold text-black"  style={{margin: '145px 0 0 0'}}>Payment
             </button>
 
           </Form>

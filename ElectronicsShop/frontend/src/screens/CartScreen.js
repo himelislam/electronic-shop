@@ -97,7 +97,7 @@ export default function CartScreen() {
                           </button>
                         </div>
 
-                        <div class="col-md-3 col-2 text-center">৳ {item.price} </div>
+                        <div class="col-md-3 col-2 text-center">৳ {item.price * item.quantity} </div>
                         <div className="col-md-1 col-1">
                           <Button
                             onClick={() => removeItemHandler(item)}

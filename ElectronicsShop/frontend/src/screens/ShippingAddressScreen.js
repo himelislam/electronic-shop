@@ -166,28 +166,28 @@ export default function ShippingAddressScreen() {
                       <div class="row">
                         <div class=" mb-4">
                           <div class="form-outline">
-                            <input type="text" id="form3Example1m" class="form-control form-control-lg" onChange={(e) => setFullName(e.target.value)} placeholder='Name' />
+                            <input type="text" id="form3Example1m" class="form-control form-control-lg" onChange={(e) => setFullName(e.target.value)} placeholder='Name' required/>
 
                           </div>
                         </div>
                       </div>
 
                       <div class="form-outline mb-4">
-                        <input type="text" id="form3Example8" class="form-control form-control-lg" onChange={(e) => setAddress(e.target.value)} placeholder='Address' />
+                        <input type="text" id="form3Example8" class="form-control form-control-lg" onChange={(e) => setAddress(e.target.value)} placeholder='Address' required/>
 
                       </div>
 
                       <div class="form-outline mb-4">
-                        <input type="number" id="form3Example3" class="form-control form-control-lg" onChange={(e) => setPostalCode(e.target.value)} placeholder='Postal Code' />
+                        <input type="number" id="form3Example3" class="form-control form-control-lg" onChange={(e) => setPostalCode(e.target.value)} placeholder='Postal Code' required/>
 
                       </div>
 
                       <div class="form-outline mb-4">
-                        <input type="text" id="form3Example2" class="form-control form-control-lg" onChange={(e) => setCity(e.target.value)} placeholder='City' />
+                        <input type="text" id="form3Example2" class="form-control form-control-lg" onChange={(e) => setCity(e.target.value)} placeholder='City' required/>
 
                       </div>
                       <div class="form-outline mb-4">
-                        <input type="text" id="form3Example2" class="form-control form-control-lg" onChange={(e) => setCountry(e.target.value)} placeholder='Country' />
+                        <input type="text" id="form3Example2" class="form-control form-control-lg" onChange={(e) => setCountry(e.target.value)} placeholder='Country' required/>
 
                       </div>
 
