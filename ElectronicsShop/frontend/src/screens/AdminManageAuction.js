@@ -201,7 +201,7 @@ export default function AdminManageAuction() {
                     </tr>
                   </thead>
                   <tbody>
-                     {/* console.log(products); */}
+                  {/* console.log(products); */}
                     {products?.map((product) => (
                       <tr key={product._id}>
                         <td> <img style={{ width: '40px', height: '40px' }} src={product.image} alt="" /> </td>
