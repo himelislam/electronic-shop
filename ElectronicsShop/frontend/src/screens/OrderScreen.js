@@ -255,7 +255,9 @@ export default function OrderScreen() {
                   </Row>
                 </ListGroup.Item>
 
-
+                <MessageBox variant="success">
+                  Payment Sent Successfully
+                </MessageBox>
                 {/* {!userInfo.isAdmin && (
                   <Elements stripe={stripePromise}>
                     <CheckoutForm
