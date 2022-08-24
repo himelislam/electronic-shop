@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useReducer  } from 'react';
+import React, { useState, useContext, useEffect, useReducer } from 'react';
 import axios from 'axios';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import Row from 'react-bootstrap/Row';
@@ -81,16 +81,17 @@ export default function AdminManageAuction() {
   const { state } = useContext(Store);
   const { userInfo } = state;
 
-useEffect(() => {
-  const fetchData = async () => {
-    try {
-      const { data } = await axios.get(`/api/manageAuction/admin?page=${page} `, {
-        headers: { Authorization: `Bearer ${userInfo.token}` },
-      });
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
 
-      dispatch({ type: 'FETCH_SUCCESS', payload: data });
-    } catch (err) { }
-  };
+        const { data } = await axios.get(`/api/manageAuction/admin?page=${page} `, {
+          headers: { Authorization: `Bearer ${userInfo.token}` },
+        });
+        console.log(data);
+        dispatch({ type: 'FETCH_SUCCESS', payload: data });
+      } catch (err) { }
+    };
 
   if (successDelete) {
     dispatch({ type: 'DELETE_RESET' });
@@ -200,6 +201,7 @@ useEffect(() => {
                     </tr>
                   </thead>
                   <tbody>
+                     {/* console.log(products); */}
                     {products?.map((product) => (
                       <tr key={product._id}>
                         <td> <img style={{ width: '40px', height: '40px' }} src={product.image} alt="" /> </td>
