@@ -29,7 +29,7 @@ const Auction = () => {
         const fetchData = async () => {
             dispatch({ type: 'FETCH_REQUEST' });
             try {
-                const result = await axios.get('/api/products');
+                const result = await axios.get('/api/manageAuction');
 
                 dispatch({ type: 'FETCH_SUCCESS', payload: result.data });
             } catch (err) {
@@ -38,7 +38,7 @@ const Auction = () => {
         };
         fetchData();
     }, []);
-
+console.log(products);
 
 
 
@@ -62,7 +62,7 @@ const Auction = () => {
         <div className='container mt-5'>
             <h1 className='text-center'><span>AUCTION</span> <span className='text-danger'>PRODUCTS</span></h1>
             <Row>
-                {products.filter(e => e.auction === 'auction').map((product) => (
+                {products.map((product) => (
                     <Col key={product.slug} sm={12} lg={6} className="mb-3">
                         <AuctionProduct product={product}></AuctionProduct>
                     </Col>

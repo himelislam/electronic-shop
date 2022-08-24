@@ -17,7 +17,7 @@ const reducer = (state, action) => {
     case 'FETCH_SUCCESS':
       return {
         ...state,
-        products: action.payload.products,
+        products: action.payload.manageAuctions,
         page: action.payload.page,
         pages: action.payload.pages,
         loading: false,
@@ -107,6 +107,7 @@ export default function AdminManageAuction() {
   //   console.log(data, 'axioessss');
   // },[])
 
+
   const createHandler = async () => {
     if (window.confirm('Are you sure to create?')) {
       try {
@@ -120,7 +121,7 @@ export default function AdminManageAuction() {
         );
         toast.success('Auction created successfully');
         dispatch({ type: 'CREATE_SUCCESS' });
-        navigate(`/admin/manageAuction/${data.product._id}`);
+        navigate(`/admin/manageAuction/${data.manageAuction._id}`);
       } catch (err) {
         toast.error(getError(error));
         dispatch({
@@ -201,7 +202,9 @@ export default function AdminManageAuction() {
                     </tr>
                   </thead>
                   <tbody>
-                     {/* console.log(products); */}
+
+                    {/* console.log(products); */}
+
                     {products?.map((product) => (
                       <tr key={product._id}>
                         <td> <img style={{ width: '40px', height: '40px' }} src={product.image} alt="" /> </td>
