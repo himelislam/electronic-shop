@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useReducer } from 'react';
+import React, { useState, useContext, useEffect, useReducer } from 'react';
 import axios from 'axios';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import Row from 'react-bootstrap/Row';
@@ -17,7 +17,7 @@ const reducer = (state, action) => {
     case 'FETCH_SUCCESS':
       return {
         ...state,
-        products: action.payload.products,
+        products: action.payload.manageAuctions,
         page: action.payload.page,
         pages: action.payload.pages,
         loading: false,
@@ -80,10 +80,11 @@ export default function AdminManageAuction() {
   useEffect(() => {
     const fetchData = async () => {
       try {
+
         const { data } = await axios.get(`/api/manageAuction/admin?page=${page} `, {
           headers: { Authorization: `Bearer ${userInfo.token}` },
         });
-
+        console.log(data);
         dispatch({ type: 'FETCH_SUCCESS', payload: data });
       } catch (err) { }
     };
@@ -94,6 +95,7 @@ export default function AdminManageAuction() {
       fetchData();
     }
   }, [page, userInfo, successDelete]);
+
 
   const createHandler = async () => {
     if (window.confirm('Are you sure to create?')) {
@@ -108,7 +110,7 @@ export default function AdminManageAuction() {
         );
         toast.success('Auction created successfully');
         dispatch({ type: 'CREATE_SUCCESS' });
-        navigate(`/admin/manageAuction/${data.product._id}`);
+        navigate(`/admin/manageAuction/${data.manageAuction._id}`);
       } catch (err) {
         toast.error(getError(error));
         dispatch({
@@ -191,7 +193,8 @@ export default function AdminManageAuction() {
                     </tr>
                   </thead>
                   <tbody>
-                    {products.map((product) => (
+                    {/* console.log(products); */}
+                    {products?.map((product) => (
                       <tr key={product._id}>
                         <td> <img style={{ width: '40px', height: '40px' }} src={product.image} alt="" /> </td>
                         <td>{product.name}</td>
