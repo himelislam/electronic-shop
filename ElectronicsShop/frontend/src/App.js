@@ -112,67 +112,72 @@ function App() {
                   {
                     !userInfo?.isAdmin && (
                       <>
-                  {
-                    userInfo || user ? 
-                    <Link to="/cart" className="nav-link text-light">
-                    Cart
-                    {cart.cartItems.length > 0 && (
-                      <Badge pill bg="danger">
-                        {cart.cartItems.reduce((a, c) => a + c.quantity, 0)}
-                      </Badge>
-                    )}
-                  </Link>
-                  :
-                  <></>
-                  }
-                  <Link to="/search" className="nav-link text-light">
-                    Products
-                  </Link>
-                  <Link to="/about" className="nav-link text-light">
-                    About Us
-                  </Link>
-                  {userInfo && (
-                    <Link to="/allAuction" className="nav-link text-light">
-                      Auction
-                    </Link>
-                  )
+                        {
+                          userInfo || user ?
+                            <Link to="/cart" className="nav-link text-light">
+                              Cart
+                              {cart.cartItems.length > 0 && (
+                                <Badge pill bg="danger">
+                                  {cart.cartItems.reduce((a, c) => a + c.quantity, 0)}
+                                </Badge>
+                              )}
+                            </Link>
+                            :
+                            <></>
+                        }
+                        {cart.cartItems.length > 0 && (
+                          <Link to="/reviews" className="nav-link text-light">
+                          Review
+                        </Link>
+                        )}
+                        <Link to="/search" className="nav-link text-light">
+                          Products
+                        </Link>
+                        <Link to="/about" className="nav-link text-light">
+                          About Us
+                        </Link>
+                        {userInfo && (
+                          <Link to="/allAuction" className="nav-link text-light">
+                            Auction
+                          </Link>
+                        )
 
-                  }
-                  <Link to="/contact" className="nav-link text-light">
-                    Contact Us
-                  </Link>
-                  {user || userInfo ? (
-                    <NavDropdown title={userInfo?.name} id="basic-nav-dropdown text-light">
-                      <LinkContainer to="/orderhistory">
-                        <NavDropdown.Item>Order History</NavDropdown.Item>
-                      </LinkContainer>
-                      <NavDropdown.Divider />
-                      <Link
-                        className="dropdown-item"
-                        to="#signout"
-                        onClick={signoutHandler}
-                      >
-                        Sign Out
-                      </Link>
-                    </NavDropdown>
-                  ) : (
-                    <Link className="nav-link" to="/signin">
-                      Sign In
-                    </Link>
-                  )}</>
+                        }
+                        <Link to="/contact" className="nav-link text-light">
+                          Contact Us
+                        </Link>
+                        {user || userInfo ? (
+                          <NavDropdown title={userInfo?.name} id="basic-nav-dropdown text-light">
+                            <LinkContainer to="/orderhistory">
+                              <NavDropdown.Item>Order History</NavDropdown.Item>
+                            </LinkContainer>
+                            <NavDropdown.Divider />
+                            <Link
+                              className="dropdown-item"
+                              to="#signout"
+                              onClick={signoutHandler}
+                            >
+                              Sign Out
+                            </Link>
+                          </NavDropdown>
+                        ) : (
+                          <Link className="nav-link" to="/signin">
+                            Sign In
+                          </Link>
+                        )}</>
                     )
                   }
                   {userInfo && userInfo.isAdmin && (
                     <>
-                    <Link to="/admin/admindashboard" className="nav-link text-light">
-                      Dashboard
-                    </Link>
-                    <Link 
+                      <Link to="/admin/admindashboard" className="nav-link text-light">
+                        Dashboard
+                      </Link>
+                      <Link
                         to="#signout"
-                        onClick={signoutHandler} 
+                        onClick={signoutHandler}
                         className="nav-link text-light">
                         Sign Out
-                    </Link></>
+                      </Link></>
                     // <NavDropdown title="Admin" id="admin-nav-dropdown" class="text-light">
                     //   <LinkContainer to="/admin/dashboard">
                     //     <NavDropdown.Item>Dashboard</NavDropdown.Item>
@@ -235,8 +240,8 @@ function App() {
                 element={<ShippingAddressScreen />}
               ></Route>
               <Route path="/payment" element={<PaymentMethodScreen />}></Route>
-              
-              
+
+
               {/* Admin Routes */}
               <Route
                 path="/admin/dashboard"
@@ -285,13 +290,13 @@ function App() {
                 path="/admin/auction"
                 element={
                   <AdminRoute>
-                    <AdminAuction/>
+                    <AdminAuction />
                   </AdminRoute>
                 }
               ></Route>
 
-             {/* Admin Manage Auction */}
-             <Route
+              {/* Admin Manage Auction */}
+              <Route
                 path="/admin/manageAuction"
                 element={
                   <AdminRoute>

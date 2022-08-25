@@ -174,6 +174,7 @@ const AuctionProductScreen = () => {
                             <input {...register("auction")} type='number' className='form-control' id="exampleFormControlTextarea1" onChange={biddingPrice}></input>
                             <br />
                             <button type='submit' className='w-25 btn btn-danger' disabled={ product?.biddedPrice  < biddedPrice  ? false : true } >Bid</button>
+                            
                         </div>
                         </form> 
                     </div>
