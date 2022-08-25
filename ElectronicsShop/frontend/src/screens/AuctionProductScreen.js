@@ -168,7 +168,7 @@ const AuctionProductScreen = () => {
                             {/* <textarea   type='number' class="form-control"  rows="1" onChange={()=>biddingPrice()} ></textarea> */}
                             <input {...register("auction")} type='number' className='form-control' id="exampleFormControlTextarea1" onChange={biddingPrice}></input>
                             <br />
-                            <button type='submit' className='w-25 btn btn-danger' disabled={product?.price < biddedPrice && product?.biddedPrice ? false : true } >Bid</button>
+                            <button type='submit' className='w-25 btn btn-danger' disabled={ product?.price  < biddedPrice  ? false : true } >Bid</button>
                         </div>
                         </form> 
                     </div>
