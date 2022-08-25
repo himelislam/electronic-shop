@@ -70,6 +70,7 @@ export default function OrderHistoryScreen() {
                 <th>TOTAL</th>
                 <th>DELIVERED</th>
                 <th>ACTIONS</th>
+                <th>REVIEWS</th>
               </tr>
             </thead>
             <tbody>
@@ -92,6 +93,17 @@ export default function OrderHistoryScreen() {
                       }}
                     >
                       Details
+                    </Button>
+                  </td>
+                  <td>
+                    <Button
+                      type="button"
+                      variant="light"
+                      onClick={() => {
+                        navigate(`/reviews`);
+                      }}
+                    >
+                      Send Review
                     </Button>
                   </td>
                 </tr>

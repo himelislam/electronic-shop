@@ -125,11 +125,11 @@ function App() {
                             :
                             <></>
                         }
-                        {cart.cartItems.length > 0 && (
+                        {/* {cart.cartItems.length > 0 && (
                           <Link to="/reviews" className="nav-link text-light">
                           Review
                         </Link>
-                        )}
+                        )} */}
                         <Link to="/search" className="nav-link text-light">
                           Products
                         </Link>
