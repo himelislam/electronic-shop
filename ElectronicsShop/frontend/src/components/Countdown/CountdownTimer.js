@@ -2,11 +2,13 @@ import "./datetime.css";
 import DateTimeDisplay from "./DateTimeDisplay";
 import useCountDown from "./hooks/useCountdown";
 
-const ExpiredNotice = () => {
+const ExpiredNotice = ({biddedUser, biddedPrice}) => {
   return (
     <div className="expired-notice">
       <span>Expired!!!</span>
       <p>Please select a future date and time.</p>
+      <p>Bid Winner : {biddedUser}</p>
+      <p>Bidded Amount : {biddedPrice}</p>
     </div>
   );
 };
@@ -29,11 +31,13 @@ const ShowCounter = ({ days, hours, minutes, seconds }) => {
 };
 
 
-const CountDownTimer = ({ targetDate }) => {
+const CountDownTimer = ({ targetDate, biddedUser, biddedPrice }) => {
   const [days, hours, minutes, seconds] = useCountDown(targetDate);
 
   if (days + hours + minutes + seconds < 0) {
-    return <ExpiredNotice />;
+    return (
+    <ExpiredNotice biddedUser={biddedUser} biddedPrice={biddedPrice}  />
+    )
   } 
   else {
     return (

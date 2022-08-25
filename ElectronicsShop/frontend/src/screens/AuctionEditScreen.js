@@ -62,7 +62,7 @@ export default function AuctionEditScreen() {
   const [brand, setBrand] = useState('');
   const [description, setDescription] = useState('');
   const [time, setTime] = useState('');
-  const biddedPrice = 0;
+  const biddedPrice = price;
   const biddedUser = '';
 
 

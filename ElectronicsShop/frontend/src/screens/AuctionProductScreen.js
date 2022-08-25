@@ -49,7 +49,8 @@ const AuctionProductScreen = () => {
 
     console.log(slug, 'under')
 
-    const [isReload, setIsReload] = useState(false)
+    const [isReload, setIsReload] = useState(false);
+    const [expired, setExpired] = useState(false);
 
     const [{ loading, error, product }, dispatch] =
         useReducer(reducer, {
@@ -72,7 +73,7 @@ const AuctionProductScreen = () => {
         fetchData();
     }, [slug, isReload]);
 
-    console.log(product, 'sluged')
+    console.log(expired, 'expired bbbbee')
 
     const { state, dispatch: ctxDispatch } = useContext(Store);
     const { cart, userInfo } = state;
@@ -134,10 +135,10 @@ const AuctionProductScreen = () => {
         setBiddedPrice(bid);
     }
 
-    // const handleBiddingTime = () =>{
-    //     console.log('timeout boss')
-    //     console.log('heii heiii')
-    // }
+    const handleBiddingTime = () =>{
+        console.log('timeout boss')
+        console.log('heii heiii')
+    }
 
     return (
         <div className='container'>
@@ -157,18 +158,22 @@ const AuctionProductScreen = () => {
                             <h3  class="product-title">{product?.name}</h3>
                             <div class="">
                                 
-                                <p class="card-text"><CountDownTimer targetDate={product?.time}/></p>
+                                <p class="card-text"><CountDownTimer targetDate={product?.time} biddedUser={product?.biddedUser} biddedPrice={product?.biddedPrice} /></p>
                             </div>
                             <p class="product-description">{product?.description}</p>
                             <input style={{display:'none'}}  {...register("name")} value={userInfo?.name} ></input>
                             <input style={{display:'none'}}  {...register("proName")} value={product?.name} ></input>
                             <h4 class="price">Current price: <span>৳{product?.price}</span></h4>
-                            <h4 class="price">Update Bidder: <span>{product?.biddedUser}</span></h4>
-                            <h4 class="price">Update Price: <span>৳{product?.biddedPrice}</span></h4>
+                            {
+                                product?.biddedPrice > product?.price && <> 
+                                    <h4 class="price">Update Bidder: <span>{product?.biddedUser}</span></h4>
+                                    <h4 class="price">Update Price: <span>৳{product?.biddedPrice}</span></h4>
+                                </>
+                            }
                             {/* <textarea   type='number' class="form-control"  rows="1" onChange={()=>biddingPrice()} ></textarea> */}
                             <input {...register("auction")} type='number' className='form-control' id="exampleFormControlTextarea1" onChange={biddingPrice}></input>
                             <br />
-                            <button type='submit' className='w-25 btn btn-danger' disabled={ product?.price  < biddedPrice  ? false : true } >Bid</button>
+                            <button type='submit' className='w-25 btn btn-danger' disabled={ product?.biddedPrice  < biddedPrice  ? false : true } >Bid</button>
                         </div>
                         </form> 
                     </div>

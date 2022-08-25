@@ -41,7 +41,7 @@ const AuctionProduct = (props) => {
                             <h5 class="card-title">{product.name}</h5>
 
                             <p class="card-text">৳{product.price}</p>
-                            <p class="card-text"><CountDownTimer targetDate={product.time}/></p>
+                            <p class="card-text"><CountDownTimer targetDate={product.time} biddedUser={product?.biddedUser} biddedPrice={product?.biddedPrice} /></p>
 
                             {
                                 userInfo === null ? (<Link className='text-decoration-none' to={`/signin`}>
