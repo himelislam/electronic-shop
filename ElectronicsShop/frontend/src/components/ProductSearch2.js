@@ -67,17 +67,17 @@ const ProductSearch2 = (props) => {
                     {
 
                         userInfo === null ? (product.countInStock > 0 ? (
-                            <button onClick={() => addToCartHandler(product)} className="button btn btn-warning btn-sm mt-2 homecardbtn">Add to Cart</button>
+                            <button onClick={() => addToCartHandler(product)} className="button btn btn-danger btn-sm mt-2 homecardbtn">Add to Cart</button>
                         ) : (
-                            <button className="button btn btn-warning btn-sm mt-2 homecardbtn" disabled>Add to Cart</button>
+                            <button className="button btn btn-danger btn-sm mt-2 homecardbtn" disabled>Add to Cart</button>
                         )) : (userInfo.isAdmin ? (
-                            <Link to='/admin/products'> <button class="button btn btn-warning btn-sm mt-2 homecardbtn" type="button">Edit Product</button></Link>
+                            <Link to='/admin/products'> <button class="button btn btn-danger btn-sm mt-2 homecardbtn" type="button">Edit Product</button></Link>
                         ) : (
 
                             product.countInStock > 0 ? (
                                 <button onClick={() => addToCartHandler(product)} className="button btn btn-warning btn-sm mt-2 homecardbtn">Add to Cart</button>
                             ) : (
-                                <button className="button btn btn-warning btn-sm mt-2 homecardbtn" disabled>Add to Cart</button>
+                                <button className="button btn btn-danger btn-sm mt-2 homecardbtn" disabled>Add to Cart</button>
                             )
 
                         ))

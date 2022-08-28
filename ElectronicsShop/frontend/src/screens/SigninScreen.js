@@ -66,8 +66,7 @@ const togglePasswordVisiblity = () => {
 
   const resetPassword = () => {
     sendPasswordResetEmail(email);
-    // toast.success('Password reset mail sent')
-    console.log('clicked to reset')
+    toast.success('Password reset mail sent')
   }
 
   const submitHandler = async data => {
@@ -176,7 +175,7 @@ const togglePasswordVisiblity = () => {
                         </div>
                     </form>
                     <div id="emailHelp" class="form-text mb-4 text-dark">
-                <a className='text-primary pe-auto' onClick={resetPassword} >Forget Password?</a>
+                <a type='button' className='text-primary pe-auto' onClick={resetPassword} >Forget Password?</a>
               </div>
                     <p><small>New to Electronic Shop? <Link to={`/signup?redirect=${redirect}`} className='text-success'>Create New Account</Link></small></p>
                     <div className="text-center">OR</div>
